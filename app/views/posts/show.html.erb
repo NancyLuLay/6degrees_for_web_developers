@@ -1,0 +1,32 @@
+<!-- Create a post -->
+<h2>Your Posts</h2>
+  <h1><%= @post.post_title %></h1>
+  <p>
+    <%= @post.post_body %>
+  </p>
+  <%= link_to "Edit Post", edit_post_path(@post) %>
+  <%= link_to "Delete Post", post_path(@post),
+                             method: :delete,
+                             data: {confirm: "Are you sure you want to delete your post?"}
+                             %>
+
+<!-- Create a comment -->
+<h2>Create a Comment</h2>
+  <%= @comment.errors.full_messages.join(", ") %>
+  <%= form_for [@post, @comment] do |f| %>
+    <div>
+      <%= f.label :comment_body %>
+      <%= f.text_area :comment_body %>
+    </div>
+  <%= f.submit %>
+  <% end %>
+
+<!-- Display comments -->
+<h2>Comments:</h2>
+  <% @post.comments.each do |comm| %>
+    <%= comm.comment_body %>
+    <%= link_to "delete", post_comment_path(@post, comm),
+                          method: :delete,
+                          data: {confirm: "Are you sure you want to delete your comment?"}%>
+    <hr>
+  <% end %>
