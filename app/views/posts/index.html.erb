@@ -1,7 +1,37 @@
-<h1>All Posts</h1>
+<div class="text-color">
+<h1 class="center">New Post</h1>
+  <div class="form-container">
+  <%= simple_form_for @post do |f|  %>
+  <div>
+    <%= f.input :post_title %>
+  </div>
+  <div>
+    <%= f.input :post_image %>
+  </div>
+  <div>
+    <%= f.input :post_body%>
+  </div>
+  <%= f.submit class: "btn btn-primary"%>
+  <% end %>
+  </div>
+
+<h1 class="center">All Posts</h1>
 
 <% @posts.each do |post| %>
-  <%= post.post_title %>
+<div class="post-background">
+<div>
+  <%= current_user.full_name %>:
+</div>
+<div class="post-title-text">
+  <%= link_to post.post_title, post_path(post)%>
+</div>
+<div >
   <%= post.post_body %>
-  <hr>
+</div>
+<div >
+  <%= image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
+</div>
+</div>
 <% end %>
+
+</div>

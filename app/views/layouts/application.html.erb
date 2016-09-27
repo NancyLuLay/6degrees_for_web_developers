@@ -6,20 +6,55 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- <link rel= "stylesheet" href="bootstrap.css"> -->
+
   </head>
 
-  <body>
-    <%= link_to "New Post", new_post_path %>
-    <%= link_to "All Posts", posts_path %>
-    <% if user_signed_in? %>
-      Welcome <%= current_user.full_name %>!
-      <%= link_to "Sign Out", sessions_path, method: :deleteareur %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_path %>
-      <%= link_to "Sign In", new_session_path %>
-    <% end %>
-
+  <body id="app-body">
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container topnav">
+        <div class="nav-bar header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand topnav" href="http://localhost:3000/">ProjectName</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class= "nav navbar-nav navbar-right" role="tablist">
+            <% if user_signed_in? %>
+              <li id="welcome-name">Welcome, <%= current_user.full_name %>!</li>
+              <li><%= link_to "Home", posts_path %></li>
+              <li><%= link_to "Edit my account", edit_user_path(current_user) %></li>
+              <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign In", new_session_path %></li>
+              <li><%= link_to "Register", new_user_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- body -->
     <%= flash[:notice] || flash[:alert] %>
-    <%= yield %>
+    <div class="container" id="body-yield">
+      <%= yield %>
+    </div>
+<!-- footer -->
+    <footer>
+      <div class="home-footer footer navbar-bottom">
+        <div class="home-footer-left">
+          <div>ProjectName</div>
+          <div><%= link_to "About"%></div>
+          <div><%= link_to "Contact"%></div>
+        </div>
+        <div class="home-footer-right">
+          <div><%= image_tag "codecore-logo.png", class: "codecore-logo" %></div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

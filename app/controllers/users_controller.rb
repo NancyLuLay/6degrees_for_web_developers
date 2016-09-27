@@ -15,6 +15,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.authenticate(params[:user][:password]) && (@user.update user_params)
+      redirect_to @user, notice: "Password updated successfully"
+    else
+      flash[:alert]="Invalid. Please try again."
+      render :edit
+    end
+  end
+
+  def show
+    @user = current_user
+  end
+
   private
 
   def user_params
@@ -22,7 +40,17 @@ class UsersController < ApplicationController
                           :last_name,
                           :email,
                           :password,
-                          :password_confirmation)
+                          :password_confirmation,
+                          :alma_mater,
+                          :academic_discipline,
+                          :specific_discipline,
+                          :specialization,
+                          :topic_of_research,
+                          :level_of_education,
+                          :current_company,
+                          :current_position,
+                          :current_website,
+                          :opportunities)
   end
 
 end

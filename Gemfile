@@ -29,6 +29,19 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'cancancan'
+
+gem 'bootstrap-sass'
+gem 'bootstrap-glyphicons'
+gem 'font-awesome-sass'
+gem 'font-awesome-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'simple_form'
+
+gem 'carrierwave', '>=1.0.0.beta', '<2.0'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

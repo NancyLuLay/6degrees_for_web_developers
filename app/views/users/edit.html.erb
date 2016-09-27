@@ -1,0 +1,23 @@
+<h1 class="center">Edit</h1>
+<div class="form-container">
+<%= @user.errors.full_messages.join(", ") %>
+<%= simple_form_for @user do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :password, label: "Current Password" %>
+    <%= f.input :new_password, label: "New password" %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :alma_mater %>
+    <%= f.select :academic_discipline, ['hello', 'bye'] %>
+    <%= f.input :specific_discipline %>
+    <%= f.input :specialization %>
+    <%= f.input :topic_of_research %>
+    <%= f.input :level_of_education %>
+    <%= f.input :current_company %>
+    <%= f.input :current_position %>
+    <%= f.input :current_website %>
+    <%= f.input :opportunities, as: :boolean %>
+    <%= f.button :submit, "Update" %>
+<% end %>
+</div>

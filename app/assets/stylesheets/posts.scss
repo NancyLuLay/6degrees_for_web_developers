@@ -1,6 +1,23 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.field_with_errors input, .field_with_errors textarea {
-  border-color: red;
+.post-title-text{
+  font-size: 30px;
+}
+
+.post-background{
+  background-image: url("fake_luxury.png");
+  padding: 30px;
+  margin: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #44DFCE;
+}
+
+.post-show{
+  margin: auto;
+  width: 800px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #4c4c4c;
 }

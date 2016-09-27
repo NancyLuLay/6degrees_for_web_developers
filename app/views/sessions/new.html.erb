@@ -1,12 +1,8 @@
-<h1>Sign In</h1>
-<%= form_tag sessions_path do %>
-<div>
-  <%= label_tag :email %>
-  <%= email_field_tag :email %>
-</div>
-<div>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-</div>
-<%= submit_tag %>
+<h1 class="center">Sign In</h1>
+<div class="form-container">
+<%= simple_form_for :session, {url: "/sessions"} do |f| %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.button :submit, "Sign In" %>
 <% end %>
+</div>

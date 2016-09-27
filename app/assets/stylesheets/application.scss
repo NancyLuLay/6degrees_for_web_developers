@@ -1,0 +1,111 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// Navbar
+#navbar{
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  z-index: 999;
+  transition: background .5s ease-in-out, opacity .5s ease;
+  min-height: 50px;
+  font-size: 15px;
+  color: white;
+}
+
+// Body
+#app-body{
+  background-image: url("gplaypattern.png");
+  margin-bottom: 200px;
+}
+
+#body-yield{
+  margin-top: 50px;
+}
+
+// Footer
+.home-footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:80px;
+  width:100%;
+  background: #BCBABA;
+  font-size: 12px;
+}
+
+.home-footer-left {
+  margin-top: 10px;
+  float: left;
+  text-align: left;
+  margin-left: 50px;
+  width: 30%;
+}
+
+.home-footer-right {
+  float: right;
+  text-align: right;
+  margin-right: 40px;
+  width: 30%;
+  font-size: 12px;
+  text-decoration: none;
+}
+.codecore-logo{
+  margin-top: 10px;
+  height: 30px;
+}
+
+// general
+#welcome-name{
+  margin-top: 13px;
+  color: #44DFCE;
+}
+
+a, li a{
+  color: black !important;
+}
+
+.center{
+  margin-top: 100px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: black;
+}
+
+.left{
+  text-align: left;
+}
+.form-container{
+  width: 800px;
+  margin: auto;
+  color: black;
+}
+
+.text-color{
+  color: black;
+}
+
+h1{
+  color: #44DFCE;
+  padding-bottom: 10px;
+}

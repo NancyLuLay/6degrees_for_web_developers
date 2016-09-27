@@ -11,6 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// Navbar color change when scrolling down
+$(document).ready(function(){
+  setInterval(function(){
+    if ($(this).scrollTop() > 50) {
+      $('#navbar').css('background-color', '#BCBABA');
+    } else {
+      $('#navbar').css('background-color', 'transparent');
+    }
+  });
+})
