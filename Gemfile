@@ -35,13 +35,15 @@ gem 'bootstrap-sass'
 gem 'bootstrap-glyphicons'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
+
 gem 'simple_form'
 
 gem 'carrierwave', '>=1.0.0.beta', '<2.0'
 gem 'mini_magick'
+
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

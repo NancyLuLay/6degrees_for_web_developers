@@ -35,7 +35,8 @@
 
 // Body
 #app-body{
-  background-image: url("gplaypattern.png");
+  background-image: url("bg.jpg");
+  background-size: contain;
   margin-bottom: 200px;
 }
 
@@ -45,12 +46,12 @@
 
 // Footer
 .home-footer {
-  position:fixed;
+  position:absolute;
   left:0px;
   bottom:0px;
   height:80px;
   width:100%;
-  background: #BCBABA;
+  background: #808786;
   font-size: 12px;
 }
 
@@ -75,21 +76,25 @@
   height: 30px;
 }
 
-// general
+// General
 #welcome-name{
   margin-top: 13px;
   color: #44DFCE;
 }
 
 a, li a{
-  color: black !important;
+  color: white !important;
 }
 
 .center{
   margin-top: 100px;
   padding-bottom: 20px;
   text-align: center;
-  color: black;
+  color: white;
+}
+
+.bold{
+  font-weight: bold;
 }
 
 .left{
@@ -98,14 +103,19 @@ a, li a{
 .form-container{
   width: 800px;
   margin: auto;
-  color: black;
+  color: white;
 }
 
 .text-color{
-  color: black;
+  color: white;
 }
 
 h1{
   color: #44DFCE;
   padding-bottom: 10px;
+}
+
+.lobster{
+  font-family: 'Lobster', cursive;
+  text-align: center;
 }

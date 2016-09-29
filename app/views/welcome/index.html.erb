@@ -1,2 +1,12 @@
 <h1>Welcome to my final project</h1>
-<%= image_tag "googlemapsimg.png"%>
+  <div id="map" style='height: 550px;'></div>
+<h1>Search by:</h1>
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @markers.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

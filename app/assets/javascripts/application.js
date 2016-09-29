@@ -14,15 +14,20 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require underscore
+//= require gmaps/google
 //= require_tree .
 
 // Navbar color change when scrolling down
 $(document).ready(function(){
   setInterval(function(){
     if ($(this).scrollTop() > 50) {
-      $('#navbar').css('background-color', '#BCBABA');
+      $('#navbar').css('background-color', '#808786');
     } else {
       $('#navbar').css('background-color', 'transparent');
     }
   });
+
+  $('.home-footer').css('top',$(document).height() + 'px')
+
 })

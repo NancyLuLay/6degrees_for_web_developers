@@ -1,8 +1,62 @@
-<div class="container">  
-<div>
-  <%= @current_user.first_name %>
+<div class="container">
+  <div id="show-container-padding">
+    <div id="show-container">
+      <div>
+        <%= image_tag @current_user.profile_picture, class:"profile-pic"%>
+      </div>
+      <div>
+        <div class="profile-header-name bold">
+          <%= @current_user.full_name %>
+        </div>
+        <div class="profile-header">
+          <%= @current_user.current_position %>
+          at <%= @current_user.current_company if @current_user.current_company%>
+        </div>
+      </div>
+      <div id="profile-content">
+        <div>
+          Alma Mater: <%= @current_user.alma_mater if @current_user.alma_mater%>
+        </div>
+        <div>
+          Academic Discipline: <%= @current_user.academic_discipline if @current_user.academic_discipline%>
+        </div>
+        <div>
+          Specific Discipline: <%= @current_user.specific_discipline if @current_user.specific_discipline%>
+        </div>
+        <div>
+          Specialization: <%= @current_user.specialization if @current_user.specialization%>
+        </div>
+        <div>
+          Topic of Research: <%= @current_user.topic_of_research if @current_user.topic_of_research%>
+        </div>
+        <div>
+          Level of Education: <%= @current_user.level_of_education if @current_user.level_of_education%>
+        </div>
+      </div>
+
+        <div>
+          <h1 class="center">Collaborations</h1>
+        </div>
+        <div id="map-padding">
+          <div id="map" class="map"></div>
+        </div>
+    </div>
+  </div>
 </div>
-<div>
-  <%= @current_user.last_name %>
-</div>
-</div>
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": <%= @current_user.latitude %>,
+        "lng": <%= @current_user.longitude %>,
+        // "title": "<%= @current_user.full_name %>"
+        // "content": <img border="0" align="left" src="<%= @current_user.profile_picture %>" >
+        "infowindow": "<img border='0' margin-right='10px' width='50%' align='left' src='<%= @current_user.profile_picture %>'>" + "<%= @current_user.full_name %>" + '<br/>'+ "<%= @current_user.current_position %>" + ' at ' + "<%= @current_user.current_company %>"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+});
+</script>
