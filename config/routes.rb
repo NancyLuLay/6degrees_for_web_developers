@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   root "welcome#index"
+  get 'auth/linkedin', as: :sign_in_with_linkedin
+  get 'auth/linkedin/callback' => 'callbacks#linkedin'
+
   resources :posts do
     resources :comments, only:[:index, :create, :destroy]
   end

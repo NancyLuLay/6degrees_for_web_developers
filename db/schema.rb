@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928214909) do
+ActiveRecord::Schema.define(version: 20160930010009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,13 @@ ActiveRecord::Schema.define(version: 20160928214909) do
     t.string   "location"
     t.float    "longitude"
     t.float    "latitude"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "linkedin_token"
+    t.string   "linkedin_secret"
+    t.text     "linkedin_raw_info"
     t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", using: :btree
   end
 
   add_foreign_key "comments", "posts"
