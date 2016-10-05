@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     resources :comments, only:[:index, :create, :destroy]
   end
 
-  resources :users, only: [:show, :new, :create, :edit, :update]
+  resources :users, only: [:show, :new, :create, :edit, :update] do
+    resources :friendships, only: [:create, :destroy]
+  end
+    # UPDATE USER
     get "users/:id/password" => "users#edit_password", as: :user_password
     patch "users/:id/password" => "users#update_password"
 

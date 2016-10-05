@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :find_user, only: [:show, :edit, :update]
+  before_action :find_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -17,23 +17,19 @@ before_action :find_user, only: [:show, :edit, :update]
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
+    # for first_name, last_name and email
     @user = User.find params[:id]
     if @user.update user_params
-      redirect_to user_path(@user)
+      redirect_to user_path(@user), notice: "success"
     else
       render :edit
       flash[:alert] = "error updating"
     end
   end
 
-  def show
-    @user = current_user
-  end
 
   private
   def find_user
@@ -41,7 +37,7 @@ before_action :find_user, only: [:show, :edit, :update]
   end
 
   def user_params
-    params.require(:user).permit(:first_name,
+    params.require(:user).permit([:first_name,
                                   :last_name,
                                   :email,
                                   :password,
@@ -56,13 +52,12 @@ before_action :find_user, only: [:show, :edit, :update]
                                   :current_company,
                                   :current_position,
                                   :current_website,
-                                  :opportunities,
-                                  :location)
+                                  {opportunities_attributes: [:title, :body, :destroy, :id]},
+                                  :location])
   end
 
 # UPDATE USER
   def edit_password
-
   end
 
   def update_password
@@ -70,8 +65,7 @@ before_action :find_user, only: [:show, :edit, :update]
       redirect_to @user, notice: "Password updated successfully"
     else
       flash[:alert] = "Invalid. Please try again."
-      render :edit_password
+      render :update_password
     end
   end
-
 end

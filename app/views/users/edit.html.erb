@@ -1,6 +1,6 @@
 <div class="form-container">
   <div>
-    <%= render "update_password" %>
+    <%= render "password" %>
     <h1 class="lobster">Edit your Profile</h3>
     <%= simple_form_for @user do |f| %>
       <%= f.input :profile_picture %>
@@ -14,6 +14,15 @@
       <%= f.input :current_position %>
       <%= f.input :website %>
       <%= f.button :submit, "Update" %>
+      <!-- <h2>Opportunities</h2>
+      <div id="opportunities">
+        <%# f.simple_fields_for :opportunities do |o| %>
+          <%# render "opportunities_fields", f: o %>
+        <%# end %>
+        <%# link_to_add_association 'add opportunity', f, :opportunities %> -->
+        <!-- </div> -->
+        <%# f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
+
 </div>
