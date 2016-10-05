@@ -20,7 +20,7 @@
 <% @posts.each do |post| %>
 <div class="post-background">
 <div>
-  <%= current_user.full_name %>:
+  <%= post.user.full_name %>:
 </div>
 <div class="post-title-text">
   <%= link_to post.post_title, post_path(post)%>

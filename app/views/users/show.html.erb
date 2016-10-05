@@ -2,38 +2,89 @@
   <div id="show-container-padding">
     <div id="show-container">
       <div>
-        <%= image_tag @current_user.profile_picture.url, class:"profile-pic"%>
+        <%= image_tag current_user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
       </div>
       <div>
         <div class="profile-header-name bold">
-          <%= @current_user.full_name %>
+          <%= current_user.full_name %>
         </div>
         <div class="profile-header">
-          <%= @current_user.current_position %>
-          at <%= @current_user.current_company if @current_user.current_company%>
-        </div>
-      </div>
-      <div id="profile-content">
-        <div>
-          Alma Mater: <%= @current_user.alma_mater if @current_user.alma_mater%>
+          <%= current_user.current_position %>
+          <% if (current_user.current_company != "") %>
+          at <%= current_user.current_company %>
+          <% end %>
         </div>
         <div>
-          Academic Discipline: <%= @current_user.academic_discipline if @current_user.academic_discipline%>
-        </div>
-        <div>
-          Specific Discipline: <%= @current_user.specific_discipline if @current_user.specific_discipline%>
-        </div>
-        <div>
-          Specialization: <%= @current_user.specialization if @current_user.specialization%>
-        </div>
-        <div>
-          Topic of Research: <%= @current_user.topic_of_research if @current_user.topic_of_research%>
-        </div>
-        <div>
-          Level of Education: <%= @current_user.level_of_education if @current_user.level_of_education%>
+          <%# link_to "Follow", friendships_path(:follower_id => @user), :method => :post %>
         </div>
       </div>
 
+      <div id="profile-content">
+        <div>
+        <%if (current_user.alma_mater != "")%>
+          Alma Mater: <%= current_user.alma_mater %>
+        <% end %>
+        </div>
+        <div>
+          <%if (current_user.academic_discipline != "")%>
+            Academic Discipline: <%= current_user.academic_discipline %>
+          <% end %>
+        </div>
+        <div>
+          <%if (current_user.specific_discipline != "")%>
+          Specific Discipline: <%= current_user.specific_discipline%>
+          <% end %>
+        </div>
+        <div>
+          <%if (current_user.specialization != "")%>
+          Specialization: <%= current_user.specialization %>
+          <% end %>
+        </div>
+        <div>
+          <%if (current_user.topic_of_research != "")%>
+          Topic of Research: <%= current_user.topic_of_research %>
+          <% end %>
+        </div>
+        <div>
+          <%if (current_user.level_of_education != "")%>
+          Level of Education: <%= current_user.level_of_education %>
+          <% end %>
+        </div>
+        <!-- <%# if user.opportunities != nil %>
+        <div>
+          <h1>Current Opportunities</h1>
+          <h3><%# user.opportunities.each do |opp| %></h3>
+          <div class="well col-md-4">
+            <h4><%# opp.title %></h4>
+            <p>
+              <%# opp.body %>
+            </p>
+          </div>
+          <%# end %>
+        </div>
+        <%# end %>
+      </div> -->
+
+      <!-- <div>
+        <h2>People you are following</h2>
+      <ul>
+        <%# for friendship in user.friendships %>
+          <li>
+            <%#h friendship.friend.username %>
+            (<%# link_to "remove", friendship, :method => :delete %>)
+          </li>
+        <%# end %>
+      </ul>
+
+      <p><%# link_to "People following you", users_path %></p>
+
+      <h2>Friended by Users</h2>
+      <ul>
+        <%# for user in user.inverse_friends %>
+          <li><%#h user.username %></li>
+        <%# end %>
+      </ul>
+      </div> -->
         <div>
           <h1 class="center">Collaborations</h1>
         </div>
@@ -49,11 +100,11 @@
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers([
       {
-        "lat": <%= @current_user.latitude %>,
-        "lng": <%= @current_user.longitude %>,
-        // "title": "<%= @current_user.full_name %>"
-        // "content": <img border="0" align="left" src="<%= @current_user.profile_picture %>" >
-        "infowindow": "<img border='0' margin-right='10px' width='50%' align='left' src='<%= @current_user.profile_picture %>'>" + "<%= @current_user.full_name %>" + '<br/>'+ "<%= @current_user.current_position %>" + ' at ' + "<%= @current_user.current_company %>"
+        "lat": <%= current_user.latitude %>,
+        "lng": <%= current_user.longitude %>,
+        // "title": "<%= current_user.full_name %>"
+        // "content": <img border="0" align="left" src="<%= current_user.profile_picture %>" >
+        "infowindow": "<img border='0' margin-right='10px' width='50%' align='left' src='<%= current_user.profile_picture %>'>" + "<%= current_user.full_name %>" + '<br/>'+ "<%= current_user.current_position %>" + ' at ' + "<%= current_user.current_company %>"
       }
     ]);
     handler.bounds.extendWith(markers);

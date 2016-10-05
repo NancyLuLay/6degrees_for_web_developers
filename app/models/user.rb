@@ -6,10 +6,21 @@ class User < ApplicationRecord
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
 
+  has_many :opportunities, dependent: :destroy
+  accepts_nested_attributes_for :opportunities, reject_if: :all_blank, allow_destroy: :true
+
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "follower_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
   geocoded_by :location
   after_validation :geocode
 
-  mount_uploader :profile_picture, ImageUploader
+  mount_uploader :profile_picture, ProfilePictureUploader
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true,
@@ -41,10 +52,12 @@ class User < ApplicationRecord
   def self.create_from_linkedin(linkedin_data)
     full_name = linkedin_data["info"]["name"].split
     create!(first_name: full_name[0],
+            last_name: full_name[1],
+            email: linkedin_data["info"]["email"],
             uid: linkedin_data[:uid],
             current_position: linkedin_data["info"]["description"],
             location: linkedin_data["info"]["location"],
-            profile_picture_url: linkedin_data["info"]["image"],
+            profile_picture: linkedin_data["info"]["image"],
             provider: linkedin_data[:provider],
             linkedin_token: linkedin_data["credentials"]["token"],
             linkedin_secret: linkedin_data["credentials"]["secret"],
