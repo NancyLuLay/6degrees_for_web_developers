@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   def update
     # for first_name, last_name and email
     @user = User.find params[:id]
+    binding.pry
     if @user.update user_params
       redirect_to user_path(@user), notice: "success"
     else
@@ -37,23 +38,23 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit([:first_name,
+    params.require(:user).permit(:first_name,
                                   :last_name,
                                   :email,
                                   :password,
                                   :password_confirmation,
                                   :profile_picture,
-                                  :alma_mater,
+                                  :current_company,
+                                  :current_position,
+                                  :current_website,
+                                  :location,
+                                  {opportunities_attributes: [:title, :body, :destroy, :id]},
+                                  {links_attributes: [:alma_mater,
                                   :academic_discipline,
                                   :specific_discipline,
                                   :specialization,
                                   :topic_of_research,
-                                  :level_of_education,
-                                  :current_company,
-                                  :current_position,
-                                  :current_website,
-                                  {opportunities_attributes: [:title, :body, :destroy, :id]},
-                                  :location])
+                                  :level_of_education]})
   end
 
 # UPDATE USER

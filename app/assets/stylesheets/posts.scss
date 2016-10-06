@@ -5,13 +5,16 @@
   font-size: 30px;
 }
 
+#all-posts-title{
+  padding-top: 20px;
+}
 .post-background{
-  background-color: #04386C;
+  background-color: #2a2a2a;
   padding: 30px;
   margin: 20px;
   border-width: 3px;
   border-style: solid;
-  border-color: #44DFCE;
+  border-color: white;
 }
 
 .post-show{
@@ -20,4 +23,8 @@
   border-width: 3px;
   border-style: solid;
   border-color: #4c4c4c;
+}
+
+#all-posts{
+  background-color: #151515;
 }

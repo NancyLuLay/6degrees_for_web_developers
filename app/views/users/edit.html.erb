@@ -3,17 +3,21 @@
     <%= render "password" %>
     <h1 class="lobster">Edit your Profile</h3>
     <%= simple_form_for @user do |f| %>
-      <%= f.input :profile_picture %>
-      <%= f.input :alma_mater, placeholder: "e.g. The Universiry of British Columbia" %>
-      <%= f.input :academic_discipline, collection: ["Agricultural Sciences", "Engineering & Technology", "Health Sciences", "Humanities", "Natural Sciences", "Social Sciences"]%>
-      <%= f.input :specific_discipline, placeholder: "e.g. Biology & Microbiology"%>
-      <%= f.input :specialization, placeholder: "e.g. Cell Biology" %>
-      <%= f.input :topic_of_research, placeholder: "e.g. Stress response evasion of the host against infection with HIV-1" %>
-      <%= f.input :level_of_education, collection: ["Certificate", "Technical Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree", "Post-Doctoral Degree"] %>
-      <%= f.input :current_company %>
-      <%= f.input :current_position %>
-      <%= f.input :website %>
-      <%= f.button :submit, "Update" %>
+    <%= f.input :profile_picture %>
+    <%= f.input :current_company %>
+    <%= f.input :current_position %>
+    <%= f.input :current_website %>
+      <%= f.simple_fields_for(:links) do |l|  %>
+        <%= l.simple_fields_for(:tag) do |t| %>
+          <%= t.input :alma_mater, placeholder: "e.g. The Universiry of British Columbia" %>
+          <%= t.input :academic_discipline, collection: ["Agricultural Sciences", "Engineering & Technology", "Health Sciences", "Humanities", "Natural Sciences", "Social Sciences"]%>
+          <%= t.input :specific_discipline, placeholder: "e.g. Biology & Microbiology"%>
+          <%= t.input :specialization, placeholder: "e.g. Cell Biology" %>
+          <%= t.input :topic_of_research, placeholder: "e.g. Stress response evasion of the host against infection with HIV-1" %>
+          <%= t.input :level_of_education, collection: ["Certificate", "Technical Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree", "Post-Doctoral Degree"] %>
+        <% end %>
+      <% end %>
+          <%= f.button :submit, "Update" %>
       <!-- <h2>Opportunities</h2>
       <div id="opportunities">
         <%# f.simple_fields_for :opportunities do |o| %>

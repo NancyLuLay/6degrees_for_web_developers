@@ -2,17 +2,18 @@ class User < ApplicationRecord
 
   attr_accessor :profile_picture_url
 
+  has_many :links, dependent: :destroy
+  has_many :tags, through: :links
+
+  accepts_nested_attributes_for :links
+  has_many :links, inverse_of: :user
+
   has_secure_password
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
 
   has_many :opportunities, dependent: :destroy
   accepts_nested_attributes_for :opportunities, reject_if: :all_blank, allow_destroy: :true
-
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "follower_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   geocoded_by :location
   after_validation :geocode

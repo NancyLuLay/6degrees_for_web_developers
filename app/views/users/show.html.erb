@@ -14,77 +14,39 @@
           at <%= current_user.current_company %>
           <% end %>
         </div>
-        <div>
-          <%# link_to "Follow", friendships_path(:follower_id => @user), :method => :post %>
-        </div>
       </div>
 
       <div id="profile-content">
         <div>
-        <%if (current_user.alma_mater != "")%>
-          Alma Mater: <%= current_user.alma_mater %>
+        <%if (current_user.linked_tags.first.alma_mater != "")%>
+          Alma Mater: <%= current_user.linked_tags.first.alma_mater %>
         <% end %>
         </div>
         <div>
-          <%if (current_user.academic_discipline != "")%>
-            Academic Discipline: <%= current_user.academic_discipline %>
+          <%if (current_user.linked_tags.first.academic_discipline != "")%>
+            Academic Discipline: <%= current_user.linked_tags.first.academic_discipline %>
           <% end %>
         </div>
         <div>
-          <%if (current_user.specific_discipline != "")%>
-          Specific Discipline: <%= current_user.specific_discipline%>
+          <%if (current_user.linked_tags.first.specific_discipline != "")%>
+          Specific Discipline: <%= current_user.linked_tags.first.specific_discipline%>
           <% end %>
         </div>
         <div>
-          <%if (current_user.specialization != "")%>
-          Specialization: <%= current_user.specialization %>
+          <%if (current_user.linked_tags.first.specialization != "")%>
+          Specialization: <%= current_user.linked_tags.first.specialization %>
           <% end %>
         </div>
         <div>
-          <%if (current_user.topic_of_research != "")%>
-          Topic of Research: <%= current_user.topic_of_research %>
+          <%if (current_user.linked_tags.first.topic_of_research != "")%>
+          Topic of Research: <%= current_user.linked_tags.first.topic_of_research %>
           <% end %>
         </div>
         <div>
-          <%if (current_user.level_of_education != "")%>
-          Level of Education: <%= current_user.level_of_education %>
+          <%if (current_user.linked_tags.first.level_of_education != "")%>
+          Level of Education: <%= current_user.linked_tags.first.level_of_education %>
           <% end %>
         </div>
-        <!-- <%# if user.opportunities != nil %>
-        <div>
-          <h1>Current Opportunities</h1>
-          <h3><%# user.opportunities.each do |opp| %></h3>
-          <div class="well col-md-4">
-            <h4><%# opp.title %></h4>
-            <p>
-              <%# opp.body %>
-            </p>
-          </div>
-          <%# end %>
-        </div>
-        <%# end %>
-      </div> -->
-
-      <!-- <div>
-        <h2>People you are following</h2>
-      <ul>
-        <%# for friendship in user.friendships %>
-          <li>
-            <%#h friendship.friend.username %>
-            (<%# link_to "remove", friendship, :method => :delete %>)
-          </li>
-        <%# end %>
-      </ul>
-
-      <p><%# link_to "People following you", users_path %></p>
-
-      <h2>Friended by Users</h2>
-      <ul>
-        <%# for user in user.inverse_friends %>
-          <li><%#h user.username %></li>
-        <%# end %>
-      </ul>
-      </div> -->
         <div>
           <h1 class="center">Collaborations</h1>
         </div>
