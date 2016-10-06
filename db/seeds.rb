@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ALMA_MATERS = ["Langara", "OCAD", "UW", "UWO", "UBC"]
+
+ALMA_MATERS.each {|am| Tag.add_anonymous_tag(am, "alma_mater")}

@@ -17,36 +17,14 @@
       </div>
 
       <div id="profile-content">
-        <div>
-        <%if (current_user.linked_tags.first.alma_mater != "")%>
-          Alma Mater: <%= current_user.linked_tags.first.alma_mater %>
+        <% User::TAG_CONTEXTS.each do |tag_context| %>
+          <div>
+            <%#if (!current_user.send("#{tag_context}_list").empty?)%>
+              <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
+            <%# end %>
+          </div>
         <% end %>
-        </div>
-        <div>
-          <%if (current_user.linked_tags.first.academic_discipline != "")%>
-            Academic Discipline: <%= current_user.linked_tags.first.academic_discipline %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.linked_tags.first.specific_discipline != "")%>
-          Specific Discipline: <%= current_user.linked_tags.first.specific_discipline%>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.linked_tags.first.specialization != "")%>
-          Specialization: <%= current_user.linked_tags.first.specialization %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.linked_tags.first.topic_of_research != "")%>
-          Topic of Research: <%= current_user.linked_tags.first.topic_of_research %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.linked_tags.first.level_of_education != "")%>
-          Level of Education: <%= current_user.linked_tags.first.level_of_education %>
-          <% end %>
-        </div>
+
         <div>
           <h1 class="center">Collaborations</h1>
         </div>

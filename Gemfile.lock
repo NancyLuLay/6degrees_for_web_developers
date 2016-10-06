@@ -38,6 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (4.0.0)
+      activerecord (>= 4.0)
     arel (7.1.2)
     autoprefixer-rails (6.4.1)
       execjs
@@ -55,6 +57,10 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chosen-rails (1.5.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     cocoon (1.2.9)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -197,12 +203,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 4.0)
   bcrypt (~> 3.1.7)
   bootstrap-glyphicons
   bootstrap-sass
   byebug
   cancancan
   carrierwave (>= 1.0.0.beta, < 2.0)
+  chosen-rails
   cocoon
   coffee-rails (~> 4.2)
   font-awesome-rails

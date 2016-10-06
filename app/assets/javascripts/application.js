@@ -16,6 +16,7 @@
 //= require underscore
 //= require gmaps/google
 //= require cocoon
+//= require chosen-jquery
 //= require_tree .
 
 // Navbar color change when scrolling down

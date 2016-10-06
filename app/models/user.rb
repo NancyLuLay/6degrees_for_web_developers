@@ -1,4 +1,13 @@
 class User < ApplicationRecord
+  TAG_CONTEXTS = [:alma_mater,
+              :academic_discipline,
+              :specific_discipline,
+              :specialization,
+              :topic_of_research,
+              :level_of_education]
+
+  acts_as_taggable
+  acts_as_taggable_on TAG_CONTEXTS
 
   attr_accessor :profile_picture_url
 

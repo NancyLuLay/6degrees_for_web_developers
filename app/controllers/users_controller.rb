@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   def update
     # for first_name, last_name and email
     @user = User.find params[:id]
-    binding.pry
     if @user.update user_params
       redirect_to user_path(@user), notice: "success"
     else
@@ -48,13 +47,9 @@ class UsersController < ApplicationController
                                   :current_position,
                                   :current_website,
                                   :location,
+                                  *User::TAG_CONTEXTS.map{|tc| "#{tc}_list"},
                                   {opportunities_attributes: [:title, :body, :destroy, :id]},
-                                  {links_attributes: [:alma_mater,
-                                  :academic_discipline,
-                                  :specific_discipline,
-                                  :specialization,
-                                  :topic_of_research,
-                                  :level_of_education]})
+                                  )
   end
 
 # UPDATE USER
