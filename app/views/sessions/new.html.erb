@@ -1,16 +1,14 @@
 <div class="form-container">
-
-<h1 class="center">Sign In</h1>
-<%= simple_form_for :sessions, :url => sessions_path do |f|%>
-  <div >
-    <%= f.input :email %>
-  </div>
-  <div >
-    <%= f.input :password %>
-  </div>
-  <div>
-    <%= f.submit "Sign In" %>
-  </div>
-<% end %>
-
+  <h1 class="center">Sign In</h1>
+  <%= simple_form_for :sessions, :url => sessions_path do |f|%>
+    <div >
+      <%= f.input :email %>
+    </div>
+    <div >
+      <%= f.input :password %>
+    </div>
+    <div>
+      <%= f.submit "Sign In" %>
+    </div>
+  <% end %>
 </div>

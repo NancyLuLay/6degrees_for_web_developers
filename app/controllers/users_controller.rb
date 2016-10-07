@@ -37,23 +37,19 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit([:first_name,
+    params.require(:user).permit(:first_name,
                                   :last_name,
                                   :email,
                                   :password,
                                   :password_confirmation,
                                   :profile_picture,
-                                  :alma_mater,
-                                  :academic_discipline,
-                                  :specific_discipline,
-                                  :specialization,
-                                  :topic_of_research,
-                                  :level_of_education,
                                   :current_company,
                                   :current_position,
                                   :current_website,
+                                  :location,
+                                  *User::TAG_CONTEXTS.map{|tc| {"#{tc}_list" => []}},
                                   {opportunities_attributes: [:title, :body, :destroy, :id]},
-                                  :location])
+                                  )
   end
 
 # UPDATE USER

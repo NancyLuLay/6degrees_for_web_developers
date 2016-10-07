@@ -22,12 +22,14 @@
 $(document).ready(function(){
   setInterval(function(){
     if ($(this).scrollTop() > 50) {
-      $('#navbar').css('background-color', '#808786');
+      $('#navbar').css('background-color', '#3f3f3f');
     } else {
       $('#navbar').css('background-color', 'transparent');
     }
   });
 
-  $('.home-footer').css('top',$(document).height() + 'px')
+  $('.home-footer').css('top',$(document).height() + 'px');
+
+
 
 })

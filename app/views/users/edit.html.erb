@@ -3,17 +3,19 @@
     <%= render "password" %>
     <h1 class="lobster">Edit your Profile</h3>
     <%= simple_form_for @user do |f| %>
-      <%= f.input :profile_picture %>
-      <%= f.input :alma_mater, placeholder: "e.g. The Universiry of British Columbia" %>
-      <%= f.input :academic_discipline, collection: ["Agricultural Sciences", "Engineering & Technology", "Health Sciences", "Humanities", "Natural Sciences", "Social Sciences"]%>
-      <%= f.input :specific_discipline, placeholder: "e.g. Biology & Microbiology"%>
-      <%= f.input :specialization, placeholder: "e.g. Cell Biology" %>
-      <%= f.input :topic_of_research, placeholder: "e.g. Stress response evasion of the host against infection with HIV-1" %>
-      <%= f.input :level_of_education, collection: ["Certificate", "Technical Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree", "Post-Doctoral Degree"] %>
-      <%= f.input :current_company %>
-      <%= f.input :current_position %>
-      <%= f.input :website %>
-      <%= f.button :submit, "Update" %>
+    <%= f.input :profile_picture %>
+    <%= f.input :current_company %>
+    <%= f.input :current_position %>
+    <%= f.input :current_website %>
+    <% User::TAG_CONTEXTS.each do |tag_context| %>
+      <%= f.input "#{tag_context}_list",
+                    # label: "#{tag_context}",
+                    collection: Tag.tags_for_context(tag_context).map(&:name),
+                    as: :select,
+                    include_blank: true,
+                    input_html: {"multiple": "" } %>
+    <% end %>
+    <%= f.button :submit, "Update Profile" %>
       <!-- <h2>Opportunities</h2>
       <div id="opportunities">
         <%# f.simple_fields_for :opportunities do |o| %>
@@ -24,5 +26,12 @@
         <%# f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
-
 </div>
+
+
+<script type="text/javascript">
+  $('select').select2({
+    tags: true,
+    tokenSeparators: [',']
+  });
+</script>

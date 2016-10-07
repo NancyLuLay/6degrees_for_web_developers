@@ -14,77 +14,17 @@
           at <%= current_user.current_company %>
           <% end %>
         </div>
-        <div>
-          <%# link_to "Follow", friendships_path(:follower_id => @user), :method => :post %>
-        </div>
       </div>
 
       <div id="profile-content">
-        <div>
-        <%if (current_user.alma_mater != "")%>
-          Alma Mater: <%= current_user.alma_mater %>
-        <% end %>
-        </div>
-        <div>
-          <%if (current_user.academic_discipline != "")%>
-            Academic Discipline: <%= current_user.academic_discipline %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.specific_discipline != "")%>
-          Specific Discipline: <%= current_user.specific_discipline%>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.specialization != "")%>
-          Specialization: <%= current_user.specialization %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.topic_of_research != "")%>
-          Topic of Research: <%= current_user.topic_of_research %>
-          <% end %>
-        </div>
-        <div>
-          <%if (current_user.level_of_education != "")%>
-          Level of Education: <%= current_user.level_of_education %>
-          <% end %>
-        </div>
-        <!-- <%# if user.opportunities != nil %>
-        <div>
-          <h1>Current Opportunities</h1>
-          <h3><%# user.opportunities.each do |opp| %></h3>
-          <div class="well col-md-4">
-            <h4><%# opp.title %></h4>
-            <p>
-              <%# opp.body %>
-            </p>
+        <% User::TAG_CONTEXTS.each do |tag_context| %>
+          <div>
+            <%if (!current_user.send("#{tag_context}_list").empty?)%>
+              <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
+            <% end %>
           </div>
-          <%# end %>
-        </div>
-        <%# end %>
-      </div> -->
+        <% end %>
 
-      <!-- <div>
-        <h2>People you are following</h2>
-      <ul>
-        <%# for friendship in user.friendships %>
-          <li>
-            <%#h friendship.friend.username %>
-            (<%# link_to "remove", friendship, :method => :delete %>)
-          </li>
-        <%# end %>
-      </ul>
-
-      <p><%# link_to "People following you", users_path %></p>
-
-      <h2>Friended by Users</h2>
-      <ul>
-        <%# for user in user.inverse_friends %>
-          <li><%#h user.username %></li>
-        <%# end %>
-      </ul>
-      </div> -->
         <div>
           <h1 class="center">Collaborations</h1>
         </div>

@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+  TAG_CONTEXTS = [:alma_mater,
+                  :level_of_education,
+                  :academic_discipline,
+                  :specific_discipline,
+                  :specialization,
+                  :topic_of_research,
+                  :extra_tag]
+
+  acts_as_taggable
+  acts_as_taggable_on TAG_CONTEXTS
 
   attr_accessor :profile_picture_url
 
@@ -8,11 +18,6 @@ class User < ApplicationRecord
 
   has_many :opportunities, dependent: :destroy
   accepts_nested_attributes_for :opportunities, reject_if: :all_blank, allow_destroy: :true
-
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "follower_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   geocoded_by :location
   after_validation :geocode
