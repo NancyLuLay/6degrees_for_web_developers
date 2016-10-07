@@ -9,11 +9,11 @@
     <%= f.input :current_website %>
     <% User::TAG_CONTEXTS.each do |tag_context| %>
       <%= f.input "#{tag_context}_list",
+                    # label: "#{tag_context}",
                     collection: Tag.tags_for_context(tag_context).map(&:name),
                     as: :select,
                     include_blank: true,
-                    # id: your-element,
-                    input_html: { class: 'chosen-select', "multiple": "" } %>
+                    input_html: {"multiple": "" } %>
     <% end %>
     <%= f.button :submit, "Update Profile" %>
       <!-- <h2>Opportunities</h2>

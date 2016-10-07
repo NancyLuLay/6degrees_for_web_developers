@@ -19,9 +19,9 @@
       <div id="profile-content">
         <% User::TAG_CONTEXTS.each do |tag_context| %>
           <div>
-            <%#if (!current_user.send("#{tag_context}_list").empty?)%>
+            <%if (!current_user.send("#{tag_context}_list").empty?)%>
               <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
-            <%# end %>
+            <% end %>
           </div>
         <% end %>
 
