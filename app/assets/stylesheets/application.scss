@@ -37,11 +37,15 @@
 .dropdown-background{
   background-color: black;
   color: white;
+  .nav-links:hover {
+    background-color: black;
+  }
 }
 
-.dropdown-hover {
-  a:hover {
-    background-color: #808786;
+#dropdown-toggle {
+  background-color: transparent;
+  &:hover {
+    background-color: black;
   }
 }
 
@@ -130,7 +134,7 @@
   bottom:0px;
   height:80px;
   width:100%;
-  background: #808786;
+  background: #3f3f3f;
   font-size: 12px;
 }
 

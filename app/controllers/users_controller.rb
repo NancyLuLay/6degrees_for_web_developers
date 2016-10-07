@@ -47,7 +47,7 @@ class UsersController < ApplicationController
                                   :current_position,
                                   :current_website,
                                   :location,
-                                  *User::TAG_CONTEXTS.map{|tc| "#{tc}_list"},
+                                  *User::TAG_CONTEXTS.map{|tc| {"#{tc}_list" => []}},
                                   {opportunities_attributes: [:title, :body, :destroy, :id]},
                                   )
   end

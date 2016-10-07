@@ -11,12 +11,6 @@ class User < ApplicationRecord
 
   attr_accessor :profile_picture_url
 
-  has_many :links, dependent: :destroy
-  has_many :tags, through: :links
-
-  accepts_nested_attributes_for :links
-  has_many :links, inverse_of: :user
-
   has_secure_password
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify

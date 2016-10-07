@@ -12,9 +12,10 @@
                     collection: Tag.tags_for_context(tag_context).map(&:name),
                     as: :select,
                     include_blank: true,
+                    # id: your-element,
                     input_html: { class: 'chosen-select', "multiple": "" } %>
     <% end %>
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Update Profile" %>
       <!-- <h2>Opportunities</h2>
       <div id="opportunities">
         <%# f.simple_fields_for :opportunities do |o| %>
@@ -25,5 +26,12 @@
         <%# f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
-
 </div>
+
+
+<script type="text/javascript">
+  $('select').select2({
+    tags: true,
+    tokenSeparators: [',']
+  });
+</script>
