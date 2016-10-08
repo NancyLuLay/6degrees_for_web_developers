@@ -1,8 +1,5 @@
 class Tag < ApplicationRecord
 
-  has_many :links, dependent: :destroy
-  has_many :users, through: :links
-
   def self.tags_for_context(context)
     ActsAsTaggableOn::Tagging.includes(:tag).where(context: context).map{|t| t.tag}
   end

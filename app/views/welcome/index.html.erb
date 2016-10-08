@@ -6,6 +6,26 @@
 <div id="index-search">
   <div class="container">
     <h1>Search by:</h1>
+    <div>
+
+      <!-- <form method="get">
+        Search: <input type="text" name="select" value="" maxlength="150" placeholder= "Search">
+        <input type="submit" value="Submit">
+      </form> -->
+
+    <%# form_tag(root_path, method: 'get',
+                            as: :select,
+                            collection: Tag.all.map(&:name),
+                            include_blank: true,
+                            input_html: {"multiple": "" }) do %>
+      <!-- <div>
+        <%# text_field_tag :query, params[:query], size: 150, placeholder: "Search"%>
+        <div>
+          <%= submit_tag'Submit' %>
+        </div>
+      </div>
+    <%# end %> -->
+  </div>
   </div>
 </div>
 
@@ -15,5 +35,13 @@
     markers = handler.addMarkers(<%=raw @markers.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+  });
+</script>
+
+
+<script type="text/javascript">
+  $('#query').select2({
+    tags: true,
+    tokenSeparators: [',']
   });
 </script>

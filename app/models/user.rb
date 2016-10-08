@@ -1,11 +1,13 @@
 class User < ApplicationRecord
-  TAG_CONTEXTS = [:alma_mater,
+  TAG_CONTEXTS = [:educational_institution,
                   :level_of_education,
-                  :academic_discipline,
-                  :specific_discipline,
                   :specialization,
-                  :topic_of_research,
-                  :extra_tag]
+                  :language_and_technology,
+                  :framework_and_library,
+                  :application_testing,
+                  :front_end_skill,
+                  :back_end_skill,
+                  :additional_keyword]
 
   acts_as_taggable
   acts_as_taggable_on TAG_CONTEXTS
