@@ -1,6 +1,8 @@
 <div class="container">
   <div id="show-container-padding">
     <div id="show-container">
+      <div id="show-container-padding">
+
       <div>
         <%= image_tag current_user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
       </div>
@@ -16,21 +18,38 @@
         </div>
       </div>
 
-      <div id="profile-content">
-        <% User::TAG_CONTEXTS.each do |tag_context| %>
-          <div>
-            <%if (!current_user.send("#{tag_context}_list").empty?)%>
-              <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
-            <% end %>
-          </div>
-        <% end %>
+      <div class="profile-summary">
+        Summary: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
 
+      <div id="profile-content">
+        <h1>Tags</h1>
+        <% User::TAG_CONTEXTS.each do |tag_context| %>
         <div>
-          <h1 class="center">Collaborations</h1>
+          <%if (!current_user.send("#{tag_context}_list").empty?)%>
+          <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
+          <% end %>
         </div>
+        <% end %>
+      </div>
+
+      <div class="">
+        <h1>Experience</h1>
+      </div>
+
+      <div class="">
+        <h1>Projects</h1>
+      </div>
+
+
+      <div>
+        <h1 class="center">Collaborations</h1>
         <div id="map-padding">
           <div id="map" class="map"></div>
         </div>
+      </div>
+
+    </div>
     </div>
   </div>
 </div>

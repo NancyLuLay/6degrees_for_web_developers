@@ -1,20 +1,22 @@
 .profile-pic{
   width: 300px;
   height: 300px;
-  padding-top: 50px;
-  padding-left: 50px;
   float:left;
 }
 
 .profile-header-name{
   margin-left: 350px;
-  padding-top: 50px;
   font-size: 50px;
 }
 
 .profile-header{
   margin-left: 350px;
   font-size: 30px;
+}
+
+.profile-summary{
+  margin-left: 350px;
+  margin-right: 50px;
 }
 
 #show-container{
@@ -26,7 +28,11 @@
 }
 
 #show-container-padding{
-  padding-top: 30px;
+  padding: 100px;
+}
+
+#show-container-padding{
+  padding: 30px;
 }
 
 #map-padding{
@@ -40,7 +46,7 @@
 }
 
 #profile-content{
-  padding-left: 50px;
+  padding-left: 350px;
   padding-top: 150px;
   font-size: 20px;
 }

@@ -48,6 +48,19 @@
   }
 }
 
+#for {
+  font-size: 12px;
+  color: red;
+}
+
+#web-dev{
+  font-style: italic;
+  color: red;
+}
+#six-degrees{
+  font-size: bold;
+  color: white;
+}
 // Hover.css for Home and SignIn
 @-webkit-keyframes hvr-pulse {
   25% {
@@ -120,6 +133,7 @@
 #app-body{
   background-image: url("bg.jpg");
   background-size: cover;
+  color: black;
 }
 
 #body-yield{
@@ -134,7 +148,7 @@
   height:80px;
   width:100%;
   background: #3f3f3f;
-  font-size: 12px;
+  // font-size: 12px;
 }
 
 .home-footer-left {
@@ -160,8 +174,10 @@
 
 // General
 #welcome-name{
-  margin-top: 13px;
-  color: #44DFCE;
+  font-family: lobster;
+  font-size: 20px;
+  color: red;
+  margin-top: 10px;
 }
 
 a, li a{
@@ -193,7 +209,7 @@ a, li a{
 }
 
 h1{
-  color: #44DFCE;
+  color: white;
   padding-bottom: 10px;
 }
 
