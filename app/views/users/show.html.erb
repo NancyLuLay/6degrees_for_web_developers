@@ -1,50 +1,80 @@
 <div class="container">
-  <div id="show-container-padding">
+  <div class="show-container-padding-top">
     <div id="show-container">
-      <div id="show-container-padding">
-
+      <div class="show-container-padding">
       <div>
-        <%= image_tag current_user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
+        <%= image_tag @user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
       </div>
       <div>
         <div class="profile-header-name bold">
-          <%= current_user.full_name %>
+          <%= @user.full_name %>
         </div>
         <div class="profile-header">
-          <%= current_user.current_position %>
-          <% if (current_user.current_company != "") %>
-          at <%= current_user.current_company %>
+          <%= @user.current_position %>
+          <% if (@user.current_company != "") %>
+          at <%= @user.current_company %>
           <% end %>
         </div>
       </div>
 
       <div class="profile-summary">
-        Summary: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <%= @user.summary %>
       </div>
 
-      <div id="profile-content">
-        <h1>Tags</h1>
-        <% User::TAG_CONTEXTS.each do |tag_context| %>
+      <div class="profile-github">
         <div>
-          <%if (!current_user.send("#{tag_context}_list").empty?)%>
-          <%= tag_context.to_s.humanize %>: <%= current_user.send("#{tag_context}_list") %>
-          <% end %>
+        <i class="fa fa-github" aria-hidden="true"></i>
+        <%= @user.github %>
         </div>
-        <% end %>
+        <div>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <%= @user.email %>
+        </div>
+        <div>
+          <i class="fa fa-mobile" aria-hidden="true"></i>
+          <%= @user.phone_number %>
+        </div>
       </div>
 
+<!-- following -->
+      <!-- <div>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+        <%= render 'follow_form' if user_signed_in? %>
+      </div> -->
       <div class="">
-        <h1>Experience</h1>
+        <span id="follow-stats">
+          <button type="button" class="btn btn-default hrv-grow">25 following</button>
+          <button type="button" class="btn btn-default hrv-grow">12 followers</button>
+        </span>
+
+        <span id="follow-button">
+          <button type="button" class="btn btn-primary hvr-grow">&nbsp;&nbsp;Follow&nbsp;&nbsp;</button>
+        </span>
+      </div>
+      <!--  -->
+
+      <div class="col-md-6">
+        <%= render 'opening_show'if @user.openings %>
+      </div>
+      <div class="col-md-6">
+        <%= render 'tag_show' if (@user.tags) %>
       </div>
 
-      <div class="">
-        <h1>Projects</h1>
+      <div class="col-lg-12 col-md-12">
+        <%= render 'experience_show' if (@user.experiences) %>
       </div>
 
+      <div class="col-lg-12 col-md-12">
+        <%= render 'project_show' if @user.projects %>
+      </div>
 
-      <div>
-        <h1 class="center">Collaborations</h1>
-        <div id="map-padding">
+      <div id="followers-div">
+        <div class="col-lg-12 col-md-12">
+          <h1 id="user-map-title"><%= @user.first_name %>'s following...</h1>
+        </div>
+        <div>
           <div id="map" class="map"></div>
         </div>
       </div>
@@ -57,16 +87,16 @@
 <script>
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers([
-      {
-        "lat": <%= current_user.latitude %>,
-        "lng": <%= current_user.longitude %>,
-        // "title": "<%= current_user.full_name %>"
-        // "content": <img border="0" align="left" src="<%= current_user.profile_picture %>" >
-        "infowindow": "<img border='0' margin-right='10px' width='50%' align='left' src='<%= current_user.profile_picture %>'>" + "<%= current_user.full_name %>" + '<br/>'+ "<%= current_user.current_position %>" + ' at ' + "<%= current_user.current_company %>"
-      }
-    ]);
+    var m = <%= raw user_markers_builder(@user).to_json %>
+    markers = handler.addMarkers(m);
+
+    var polylines = [
+      <%= raw line_coordinates_lat_lng(@user).to_json %>
+    ]
+
+    handler.addPolylines(polylines)
+
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-});
+  });
 </script>

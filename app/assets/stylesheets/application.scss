@@ -61,6 +61,7 @@
   font-size: bold;
   color: white;
 }
+
 // Hover.css for Home and SignIn
 @-webkit-keyframes hvr-pulse {
   25% {
@@ -134,6 +135,7 @@
   background-image: url("bg.jpg");
   background-size: cover;
   color: black;
+  font-family: 'Roboto Slab', serif;
 }
 
 #body-yield{
@@ -180,15 +182,19 @@
   margin-top: 10px;
 }
 
-a, li a{
+li a{
   color: white !important;
+}
+
+a{
+  color: black;
 }
 
 .center{
   margin-top: 100px;
   padding-bottom: 20px;
   text-align: center;
-  color: white;
+  font-family: 'Roboto Slab', serif;
 }
 
 .bold{
@@ -198,22 +204,24 @@ a, li a{
 .left{
   text-align: left;
 }
-.form-container{
-  width: 800px;
-  margin: auto;
-  color: white;
-}
 
 .text-color{
   color: white;
 }
 
-h1{
-  color: white;
-  padding-bottom: 10px;
-}
-
 .lobster{
   font-family: 'Lobster', cursive;
   text-align: center;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+p{
+  white-space: pre-line;
+}
+
+#sign-in-link:hover {
+  background-color: black;
 }

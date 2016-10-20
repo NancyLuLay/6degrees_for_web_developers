@@ -1,0 +1,11 @@
+<div>
+  <h1 id="exp-title">Experience</h1>
+  <% @user.experiences.each do |experience| %>
+    <div class="well experience-border col-md-12 ">
+      <h3><%= experience.title %></h3>
+        <p>
+          <%= experience.body %>
+        </p>
+    </div>
+    <% end %>
+</div>

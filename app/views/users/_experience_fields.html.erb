@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <%= f.input :title %>
+  <%= f.input :body, label: "Description", :input_html => { 'rows' => 5} %>
+    <div class="hvr-grow">
+    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+      <%= link_to_remove_association 'Remove Experience', f %>
+    </div>
+  <hr class="black">
+</div>

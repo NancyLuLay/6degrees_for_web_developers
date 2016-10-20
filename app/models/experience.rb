@@ -1,4 +1,4 @@
-class Opportunity < ApplicationRecord
+class Experience < ApplicationRecord
   belongs_to :user, optional: true
 
   validates :title, presence: true

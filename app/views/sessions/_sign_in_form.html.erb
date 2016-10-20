@@ -1,0 +1,14 @@
+<a class="navbar-brand topnav lobster hvr-grow" href="http://localhost:3000/"><span id="six-degrees">6Degrees</span>&nbsp;&nbsp;<span id="for">for</span><span id="web-dev">Web Developers</span></a>
+
+<h1 class="center">Sign In</h1>
+<%= simple_form_for :sessions, :url => sessions_path do |f|%>
+  <div >
+    <%= f.input :email %>
+  </div>
+  <div >
+    <%= f.input :password %>
+  </div>
+  <div>
+      <%= f.button :submit, "Sign In", id:"btn-sign-in",  class:"col-md-offset-4 col-md-4 hvr-grow" %>
+  </div>
+<% end %>
