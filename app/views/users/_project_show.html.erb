@@ -1,0 +1,27 @@
+<div>
+  <h1 id="project-title">Projects</h1>
+  <div class="project-show">
+    <% @user.projects.each do |project| %>
+    <div class="well col-lg-12 col-md-12 project-border">
+      <h3 class= "col-lg-12 col-md-12"><%= project.title %> (<%= project.time_period %>) </h3>
+        <% if project.project_image.url(:medium) %>
+        <div class="col-lg-3 col-md-3">
+          <%= image_tag project.project_image.url(:medium) %>
+        </div>
+        <div class= "col-lg-9 col-md-9 project-body-show">
+          <%= project.body %>
+        </div>
+        <div class="col-lg-offset-3 col-lg-9 col-md-offset-3 col-md-9">
+          <div><i class="fa fa-github" aria-hidden="true"></i>
+          <%= project.source_code %>
+        </div>
+          <div>
+          <i class="fa fa-laptop" aria-hidden="true"></i>
+          <%= project.project_url %>
+        </div>
+        </div>
+        <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

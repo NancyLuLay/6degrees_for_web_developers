@@ -30,6 +30,4 @@ $(document).ready(function(){
 
   $('.home-footer').css('top',$(document).height() + 'px');
 
-
-
 })

@@ -2,10 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #index-search{
-  background-color: #064273;
+  background-color: black;
+  color: white;
+  padding-bottom: 20px;
 }
 
 .index-map{
   height: 550px;
   margin-bottom: 50px;
+}
+
+.select-tag{
+  max-width: 90%;
+}
+
+.search-label{
+  font-size: 30px;
+}
+
+#search-btn{
+  text-align: right;
+  border: 3px solid red;
+}
+
+#search-title{
+  padding: 15px;
+}
+
+#params-display{
+  color: red;
+}
+
+#welcome-title{
+  color: white;
+  padding-bottom: 10px;
+  text-align: center;
+  font-family: lobster;
+  font-size: 60px;
 }

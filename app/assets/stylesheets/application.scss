@@ -48,6 +48,20 @@
   }
 }
 
+#for {
+  font-size: 12px;
+  color: red;
+}
+
+#web-dev{
+  font-style: italic;
+  color: red;
+}
+#six-degrees{
+  font-size: bold;
+  color: white;
+}
+
 // Hover.css for Home and SignIn
 @-webkit-keyframes hvr-pulse {
   25% {
@@ -120,6 +134,8 @@
 #app-body{
   background-image: url("bg.jpg");
   background-size: cover;
+  color: black;
+  font-family: 'Roboto Slab', serif;
 }
 
 #body-yield{
@@ -134,7 +150,7 @@
   height:80px;
   width:100%;
   background: #3f3f3f;
-  font-size: 12px;
+  // font-size: 12px;
 }
 
 .home-footer-left {
@@ -160,19 +176,25 @@
 
 // General
 #welcome-name{
-  margin-top: 13px;
-  color: #44DFCE;
+  font-family: lobster;
+  font-size: 20px;
+  color: red;
+  margin-top: 10px;
 }
 
-a, li a{
+li a{
   color: white !important;
+}
+
+a{
+  color: black;
 }
 
 .center{
   margin-top: 100px;
   padding-bottom: 20px;
   text-align: center;
-  color: white;
+  font-family: 'Roboto Slab', serif;
 }
 
 .bold{
@@ -182,22 +204,24 @@ a, li a{
 .left{
   text-align: left;
 }
-.form-container{
-  width: 800px;
-  margin: auto;
-  color: white;
-}
 
 .text-color{
   color: white;
 }
 
-h1{
-  color: #44DFCE;
-  padding-bottom: 10px;
-}
-
 .lobster{
   font-family: 'Lobster', cursive;
   text-align: center;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+p{
+  white-space: pre-line;
+}
+
+#sign-in-link:hover {
+  background-color: black;
 }

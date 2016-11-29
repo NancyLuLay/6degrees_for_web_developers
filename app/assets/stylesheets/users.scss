@@ -1,48 +1,114 @@
+// profile-show
 .profile-pic{
   width: 300px;
   height: 300px;
-  padding-top: 50px;
-  padding-left: 50px;
   float:left;
 }
 
 .profile-header-name{
   margin-left: 350px;
-  padding-top: 50px;
-  font-size: 50px;
+  font-size: 45px;
 }
 
 .profile-header{
   margin-left: 350px;
-  font-size: 30px;
+  font-size: 25px;
+}
+
+.profile-summary{
+  margin-left: 350px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.profile-github{
+  margin-left: 350px;
+  margin-right: 50px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 #show-container{
   background-color: #BCBABA;
-  background: rgba(255,255,255,0.45);
-  margin: auto;
+  background: rgba(255,255,255,0.9);
+  margin-bottom: 30px;
   border-radius: 10px;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
 }
 
-#show-container-padding{
-  padding-top: 30px;
+.show-container-padding-top{
+  padding-top: 50px;
+}
+
+.show-container-padding{
+  padding: 30px;
+}
+
+#profile-container{
+  background: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+#experience-container{
+  background: rgba(255,255,255,0.9);
+  border-width: 4px;
+  border-color: purple;
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+#project-container{
+  background: rgba(255,255,255,0.9);
+  border-width: 4px;
+  border-color: green;
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+#opening-container{
+  background: rgba(255,255,255,0.9);
+  border-width: 4px;
+  border-color: orange;
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+#user-edit-container{
+  background: rgba(255,255,255,0.9);
+  border-width: 4px;
+  border-color: blue;
+  border-style: solid;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 #map-padding{
   padding-bottom: 0;
-}
-
-.map {
-  width: 80%;
-  height: 400px;
   margin: auto;
 }
 
-#profile-content{
-  padding-left: 50px;
-  padding-top: 150px;
-  font-size: 20px;
+.map {
+  width: 100%;
+  height: 500px;
+}
+
+// Tag show
+#tag-content{
+  // margin-left: 350px;
+}
+
+#tag-title{
+  text-align: center;
 }
 
 .padding-infowindow{
@@ -51,4 +117,148 @@
 
 .select2-selection__choice {
   background-color: blue !important;
+}
+
+.well.tag-border{
+  border-color: blue;
+}
+
+.well.experience-border{
+  border-color: purple;
+}
+
+.well.project-border{
+  border-color: green;
+}
+
+.well.opening-border{
+  border-color: orange;
+}
+
+// relationships
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    // border-left: 1px solid $gray-lighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+  a {
+    padding: 0;
+  }
+}
+
+.users.follow {
+  padding: 0;
+}
+
+.btn-form{
+  margin-top: 30px;
+}
+
+.btn-edit-info {
+  margin: auto;
+  border-width: 4px;
+  border-color: blue !important;
+  border-style: solid;
+}
+
+.btn-opening {
+  margin: auto;
+  border-width: 4px;
+  border-color: orange !important;
+  border-style: solid;
+}
+
+.btn-project {
+  margin: auto;
+  border-width: 4px;
+  border-color: green !important;
+  border-style: solid;
+}
+
+.btn-experience {
+  margin: auto;
+  border-width: 4px;
+  border-color: purple !important;
+  border-style: solid;
+}
+
+.edit-title{
+  font-size: 40px;
+  font-family: lobster;
+  text-align: center;
+}
+
+.black{
+  border-color: black;
+}
+
+#registration-title{
+  font-size: 60px;
+  font-family: lobster;
+  color: white;
+  text-align: center;
+}
+
+#registration-container{
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  color: white;
+}
+
+#followers-div{
+  padding-top: 150px;
+  text-align: center;
+}
+
+// project-show
+.project-body-show{
+  text-align: justify;
+}
+
+// opening
+#opening-title{
+  text-align: center;
+}
+
+// experience
+#exp-title{
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+// project
+#project-title{
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+
+// map
+#user-map-title{
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
 }

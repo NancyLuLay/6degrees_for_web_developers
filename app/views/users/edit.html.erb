@@ -1,37 +1,9 @@
-<div class="form-container">
-  <div>
-    <%= render "password" %>
-    <h1 class="lobster">Edit your Profile</h3>
-    <%= simple_form_for @user do |f| %>
-    <%= f.input :profile_picture %>
-    <%= f.input :current_company %>
-    <%= f.input :current_position %>
-    <%= f.input :current_website %>
-    <% User::TAG_CONTEXTS.each do |tag_context| %>
-      <%= f.input "#{tag_context}_list",
-                    # label: "#{tag_context}",
-                    collection: Tag.tags_for_context(tag_context).map(&:name),
-                    as: :select,
-                    include_blank: true,
-                    input_html: {"multiple": "" } %>
-    <% end %>
-    <%= f.button :submit, "Update Profile" %>
-      <!-- <h2>Opportunities</h2>
-      <div id="opportunities">
-        <%# f.simple_fields_for :opportunities do |o| %>
-          <%# render "opportunities_fields", f: o %>
-        <%# end %>
-        <%# link_to_add_association 'add opportunity', f, :opportunities %> -->
-        <!-- </div> -->
-        <%# f.submit class: "btn btn-primary" %>
-    <% end %>
+<div class="container">
+  <div class="show-container-padding-top">
+    <div id="user-edit-container">
+      <div class="show-container-padding">
+        <%= render "password" %>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<script type="text/javascript">
-  $('select').select2({
-    tags: true,
-    tokenSeparators: [',']
-  });
-</script>

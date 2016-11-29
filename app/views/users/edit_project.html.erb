@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="show-container-padding-top">
+    <div id="project-container">
+      <div class="show-container-padding">
+        <div class="edit-title">Projects</div>
+          <%= simple_form_for @user do |f| %>
+          <div id="projects">
+            <%= f.simple_fields_for :projects do |r| %>
+            <%= render "project_fields", f: r %>
+            <% end %>
+            <div class="hvr-grow">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              <%= link_to_add_association 'Add New Project', f, :projects %>
+            </div>
+          </div>
+          <div class="btn-form col-md-offset-5 col-md-4 hvr-grow">
+            <%= f.button :submit, "Update Project", class:"btn-project" %>
+          </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

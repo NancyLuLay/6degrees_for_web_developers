@@ -1,0 +1,23 @@
+<div class="nested-fields">
+  <%= f.input :project_image %>
+  <%= f.input :title %>
+  <%= f.input :body, label: "Description", :input_html => { 'rows' => 3} %>
+  <%= f.input :location %>
+  <div class="daterange">
+    <%= f.input :time_period%>
+  </div>
+  <%= f.input :source_code %>
+  <%= f.input :project_url %>
+  <div class="hvr-grow">
+    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+    <%= link_to_remove_association 'Remove Project', f %>
+  </div>
+  <hr class="black">
+</div>
+
+
+<script type="text/javascript">
+$(function() {
+    $('.daterange div input').daterangepicker();
+});
+</script>

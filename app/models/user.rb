@@ -1,11 +1,13 @@
 class User < ApplicationRecord
-  TAG_CONTEXTS = [:alma_mater,
+  TAG_CONTEXTS = [:educational_institution,
                   :level_of_education,
-                  :academic_discipline,
-                  :specific_discipline,
                   :specialization,
-                  :topic_of_research,
-                  :extra_tag]
+                  :language_and_technology,
+                  :framework_and_library,
+                  :application_testing,
+                  :front_end_skill,
+                  :back_end_skill,
+                  :additional_keyword]
 
   acts_as_taggable
   acts_as_taggable_on TAG_CONTEXTS
@@ -13,11 +15,35 @@ class User < ApplicationRecord
   attr_accessor :profile_picture_url
 
   has_secure_password
+
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
 
-  has_many :opportunities, dependent: :destroy
-  accepts_nested_attributes_for :opportunities, reject_if: :all_blank, allow_destroy: :true
+  has_many :experiences, dependent: :destroy
+  accepts_nested_attributes_for :experiences,
+                                reject_if: :all_blank,
+                                allow_destroy: :true
+
+  has_many :projects, dependent: :destroy
+  accepts_nested_attributes_for :projects,
+                                reject_if: :all_blank,
+                                allow_destroy: :true
+
+  has_many :openings, dependent: :destroy
+  accepts_nested_attributes_for :openings,
+                                reject_if: :all_blank,
+                                allow_destroy: :true
 
   geocoded_by :location
   after_validation :geocode
@@ -42,6 +68,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}".squeeze(" ").strip.titleize
   end
 
+# LinkedIn Oauth
   def from_oauth?
     uid.present? || provider.present?
   end
@@ -68,6 +95,29 @@ class User < ApplicationRecord
             linkedin_secret: linkedin_data["credentials"]["secret"],
             password: SecureRandom.hex(32),
             linkedin_raw_info: linkedin_data)
+  end
+
+  # Returns a user's status feed.
+ def feed
+   following_ids = "SELECT followed_id FROM relationships
+                      WHERE  follower_id = :user_id"
+     Post.where("user_id IN (#{following_ids})
+                      OR user_id = :user_id", user_id: id)
+ end
+
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 
 end
