@@ -8,7 +8,10 @@ $.UserLinks = {
    },
 
    setupClose: function() {
-      $('[data-popup-close]').on('click', function(e) {      e.preventDefault();      var fadeOutTarget = e.target.dataset.popupClose;      $('[data-popup="' + fadeOutTarget + '"]').fadeOut(350);
+      $('[data-popup-close]').on('click', function(e) {
+       e.preventDefault();
+       var fadeOutTarget = e.target.dataset.popupClose;
+       $('[data-popup="' + fadeOutTarget + '"]').fadeOut(350);
     });
   },
    init: function() {

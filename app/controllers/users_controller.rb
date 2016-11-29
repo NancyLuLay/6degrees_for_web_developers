@@ -130,16 +130,4 @@ class UsersController < ApplicationController
                                   )
   end
 
-# UPDATE USER
-  def edit_password
-  end
-
-  def update_password
-    if @user.authenticate(params[:user][:old_password]) && (@user.update user_params)
-      redirect_to @user, notice: "Password updated successfully"
-    else
-      flash[:alert] = "Invalid. Please try again."
-      render :update_password
-    end
-  end
 end

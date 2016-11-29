@@ -120,8 +120,4 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-  def gmaps4rails_infowindow
-    "hello"
-  end
-
 end
