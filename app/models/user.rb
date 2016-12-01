@@ -12,6 +12,18 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on TAG_CONTEXTS
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :password, presence: true
+  validates :current_position, presence: true
+  validates :location, presence: true
+
+  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, presence: true,
+                    uniqueness: {case_sensitive: false},
+                    format: VALID_EMAIL_REGEX,
+                    unless: :from_oauth?
+
   attr_accessor :profile_picture_url
 
   has_secure_password
@@ -50,19 +62,7 @@ class User < ApplicationRecord
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-
-  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :email, presence: true,
-                    uniqueness: {case_sensitive: false},
-                    format: VALID_EMAIL_REGEX,
-                    unless: :from_oauth?
-
   serialize :linkedin_data, Hash
-
-  validates :current_position, presence: true
-  validates :location, presence: true
 
   def full_name
     "#{first_name} #{last_name}".squeeze(" ").strip.titleize
@@ -83,13 +83,13 @@ class User < ApplicationRecord
 
   def self.create_from_linkedin(linkedin_data)
     full_name = linkedin_data["info"]["name"].split
+    byebug
     create!(first_name: full_name[0],
             last_name: full_name[1],
             email: linkedin_data["info"]["email"],
             uid: linkedin_data[:uid],
             current_position: linkedin_data["info"]["description"],
             location: linkedin_data["info"]["location"],
-            profile_picture: linkedin_data["info"]["image"],
             provider: linkedin_data[:provider],
             linkedin_token: linkedin_data["credentials"]["token"],
             linkedin_secret: linkedin_data["credentials"]["secret"],

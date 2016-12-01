@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -37,6 +36,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
 # edit forms for profile
   def edit_profile
     @user = User.find params[:id]

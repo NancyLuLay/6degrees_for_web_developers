@@ -1,85 +1,80 @@
-<div class="container">
-  <div class="show-container-padding-top">
-    <div id="show-container">
-      <div class="show-container-padding">
-      <div>
+<div class="container show-container">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         <%= image_tag @user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
-      </div>
-      <div>
-        <div class="profile-header-name bold">
-          <%= @user.full_name %>
-        </div>
-        <div class="profile-header">
-          <%= @user.current_position %>
-          <% if (@user.current_company != "") %>
-          at <%= @user.current_company %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="profile-summary">
-        <%= @user.summary %>
-      </div>
-
-      <div class="profile-github">
-        <div>
-        <i class="fa fa-github" aria-hidden="true"></i>
-        <%= @user.github %>
-        </div>
-        <div>
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          <%= @user.email %>
-        </div>
-        <div>
-          <i class="fa fa-mobile" aria-hidden="true"></i>
-          <%= @user.phone_number %>
-        </div>
-      </div>
-
-<!-- following -->
+        <button type="button" class="btn btn-default hrv-grow col-lg-4 col-sm-4 col-xs-4">25 following</button>
+        <button type="button" class="btn btn-default hrv-grow col-lg-4 col-sm-4 col-xs-4">12 followers</button>
+        <button type="button" class="btn btn-primary hvr-grow col-lg-4 col-sm-4 col-xs-4">Follow</button>
+      <!-- following -->
       <!-- <div>
       <section class="stats">
         <%= render 'shared/stats' %>
       </section>
         <%= render 'follow_form' if user_signed_in? %>
       </div> -->
-      <div class="">
-        <span id="follow-stats">
-          <button type="button" class="btn btn-default hrv-grow">25 following</button>
-          <button type="button" class="btn btn-default hrv-grow">12 followers</button>
-        </span>
-
-        <span id="follow-button">
-          <button type="button" class="btn btn-primary hvr-grow">&nbsp;&nbsp;Follow&nbsp;&nbsp;</button>
-        </span>
+      <!-- <div class="">
+        <span id="col-lg-12 follow-stats"> -->
+        <!-- </span>
+      </div> -->
+    </div>
+    <div class="col-lg-8 col-md-8">
+      <div class="profile-header-name bold">
+        <%= @user.full_name %>
       </div>
-      <!--  -->
-
-      <div class="col-md-6">
-        <%= render 'opening_show'if @user.openings %>
+      <div class="profile-header">
+        <%= @user.current_position %>
+        <% if (@user.current_company != nil) %>
+        at <%= @user.current_company %>
+        <% end %>
       </div>
-      <div class="col-md-6">
-        <%= render 'tag_show' if (@user.tags) %>
+      <div class="text-content-just">
+        <%= @user.summary %>
       </div>
-
-      <div class="col-lg-12 col-md-12">
-        <%= render 'experience_show' if (@user.experiences) %>
-      </div>
-
-      <div class="col-lg-12 col-md-12">
-        <%= render 'project_show' if @user.projects %>
-      </div>
-
-      <div id="followers-div">
-        <div class="col-lg-12 col-md-12">
-          <h1 id="user-map-title"><%= @user.first_name %>'s following...</h1>
+      <div class="profile-github">
+        <div>
+          <% if @user.phone_number != nil %>
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <%= @user.github %>
+          <% end %>
         </div>
         <div>
-          <div id="map" class="map"></div>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <%= @user.email%>
+        </div>
+        <div>
+          <% if @user.phone_number != nil %>
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <%= @user.phone_number%>
+          <% end %>
         </div>
       </div>
-
     </div>
+  </div>
+    <!--  -->
+  <% if current_user.id == @user.id && @user.openings.count < 1 && @user.taggings.count < 1 && @user.experiences.count < 1 && @user.projects.count < 1%>
+    <h3 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-form">To update your profile go to Settings > Edit Profile</h3>
+  <% else %>
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <%= render 'opening_show' if @user.openings.count >= 1 %>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <%= render 'tag_show' if @user.taggings.count >= 1 %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <%= render 'experience_show' if @user.experiences.count >= 1%>
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <%= render 'project_show' if @user.projects.count >= 1%>
+    </div>
+    <% end %>
+    <div class="followers-div">
+      <div class="col-lg-12 col-md-12">
+        <h1 class="user-map-title"><%=@user.first_name%>'s following...</h1>
+        <div id="map" class="map"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -95,7 +90,6 @@
     ]
 
     handler.addPolylines(polylines)
-
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });

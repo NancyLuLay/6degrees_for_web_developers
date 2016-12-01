@@ -1,23 +1,19 @@
 <div class="container">
-  <div class="show-container-padding-top">
-    <div id="experience-container">
-      <div class="show-container-padding">
-        <div class="edit-title">Experience</div>
-          <%= simple_form_for @user do |f| %>
-          <div id="experiences">
-            <%= f.simple_fields_for :experiences do |r| %>
-            <%= render "experience_fields", f: r %>
-            <% end %>
-            <div class="hvr-grow">
-              <i class="fa fa-plus-circle" aria-hidden="true"></i>
-              <%= link_to_add_association 'Add New Experience', f, :experiences%>
-            </div>
-          </div>
-          <div class="btn-form col-md-offset-5 col-md-4 hvr-grow">
-            <%= f.button :submit, "Update Experience", class:"btn-experience" %>
-          </div>
-          <% end %>
+  <div class="experience-container">
+    <div class="edit-title">Experience</div>
+    <%= simple_form_for @user do |f| %>
+    <div class="experiences">
+      <%= f.simple_fields_for :experiences do |r| %>
+      <%= render "experience_fields", f: r %>
+      <% end %>
+      <div class="hvr-grow">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <%= link_to_add_association 'Add New Experience', f, :experiences%>
       </div>
     </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-form hvr-grow">
+      <%= f.button :submit, "Update Experience", class:"btn-experience" %>
+    </div>
+    <% end %>
   </div>
 </div>

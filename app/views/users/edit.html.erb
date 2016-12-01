@@ -1,9 +1,18 @@
 <div class="container">
-  <div class="show-container-padding-top">
-    <div id="user-edit-container">
-      <div class="show-container-padding">
-        <%= render "password" %>
+  <div class="user-edit-container">
+    <div class="edit-title">Update Personal Information</div>
+    <%= simple_form_for @user do |f| %>
+      <div>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email, label: '* Email'%>
+        <%= f.input :location %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation, label: '* Password Confirmation' %>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-form hvr-grow">
+          <%= f.button :submit, "Update Information", class:"btn-edit-info" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

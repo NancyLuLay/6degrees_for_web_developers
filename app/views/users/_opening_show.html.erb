@@ -1,11 +1,11 @@
 <div class="">
-  <h1 id="opening-title">Openings</h1>
+  <h1 class="opening-title">Openings</h1>
   <% @user.openings.each do |opening| %>
-    <div class="well opening-border col-md-12">
+    <div class="well opening-border text-content-just">
       <h3><%= opening.title %></h3>
-        <p>
-          <%= opening.body %>
-        </p>
+      <p>
+        <%= opening.body %>
+      </p>
     </div>
     <% end %>
 </div>
