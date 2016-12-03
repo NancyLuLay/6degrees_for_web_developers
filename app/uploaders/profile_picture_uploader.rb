@@ -37,6 +37,9 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
   version :version_map_image do
     process resize_to_fit: [50, 50]
   end
+  version :version_thumb do
+    process resize_to_fit: [50, 50]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -22,10 +22,9 @@
   </head>
 
   <body id="app-body">
-    <!-- Navbar -->
     <%= render '/layouts/navbar' %>
-    <!-- body -->
     <div id="body-yield">
+      <%= flash[:notice] %>
       <%= yield %>
     </div>
 <!-- footer -->

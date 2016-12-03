@@ -36,11 +36,12 @@ class User < ApplicationRecord
                                    foreign_key: "followed_id",
                                    dependent: :destroy
 
+  has_many :followeds, through: :active_relationships
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  has_many :posts, dependent: :nullify
-  has_many :comments, dependent: :nullify
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_many :experiences, dependent: :destroy
   accepts_nested_attributes_for :experiences,
@@ -97,27 +98,20 @@ class User < ApplicationRecord
             linkedin_raw_info: linkedin_data)
   end
 
-  # Returns a user's status feed.
+  # Returns a user newsfeed
  def feed
-   following_ids = "SELECT followed_id FROM relationships
-                      WHERE  follower_id = :user_id"
-     Post.where("user_id IN (#{following_ids})
-                      OR user_id = :user_id", user_id: id)
+   following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+   Post.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
  end
 
-  # Follows a user.
+  # Follows a user
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end
 
-  # Unfollows a user.
+  # Unfollows a user
   def unfollow(other_user)
     active_relationships.find_by(followed_id: other_user.id).destroy
-  end
-
-  # Returns true if the current user is following the other user.
-  def following?(other_user)
-    following.include?(other_user)
   end
 
 end

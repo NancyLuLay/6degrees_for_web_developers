@@ -3,10 +3,18 @@ form input[type=text], form input[type=password], form input[type=email], form i
   width: 100%;
 }
 
+.btn-follow{
+  color: #fff !important;
+  background-color: #337ab7 !important;
+  border-color: #2e6da4 !important;
+}
+
 // profile-show
 .profile-pic{
   width: 360px;
   height: 350px;
+  max-width: 360px;
+  max-height: 350px;
   float:left;
 }
 
@@ -50,45 +58,6 @@ form input[type=text], form input[type=password], form input[type=email], form i
   background-color: #3f3f3f !important;
   color: white;
 }
-
-// relationships
-// .btn-follow{
-//   padding-top: 10px;
-// }
-//
-// .stats {
-//   overflow: auto;
-//   margin-top: 0;
-//   padding: 0;
-//   a {
-//     float: left;
-//     padding: 0 10px;
-//     // border-left: 1px solid $gray-lighter;
-//     color: gray;
-//     &:first-child {
-//       padding-left: 0;
-//       border: 0;
-//     }
-//     &:hover {
-//       text-decoration: none;
-//       color: blue;
-//     }
-//   }
-//   strong {
-//     display: block;
-//   }
-// }
-//
-// .user_avatars {
-//   overflow: auto;
-//   margin-top: 10px;
-//   .gravatar {
-//     margin: 1px 1px;
-//   }
-//   a {
-//     padding: 0;
-//   }
-// }
 
 .black{
   border-color: black;
