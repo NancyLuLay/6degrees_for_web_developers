@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -37,6 +36,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
 # edit forms for profile
   def edit_profile
     @user = User.find params[:id]
@@ -91,14 +91,12 @@ class UsersController < ApplicationController
 
   # following
   def following
-  #  @title = "Following"
    @user  = User.find(params[:id])
    @users = @user.following.page(params[:page]).per(FOLLOWING_PER_PAGE)
    render 'show_follow'
  end
 
  def followers
-  #  @title = "Followers"
    @user  = User.find(params[:id])
    @users = @user.followers.page(params[:page]).per(FOLLOWERS_PER_PAGE)
    render 'show_follow'

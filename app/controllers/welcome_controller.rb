@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   def index
     @user = User.new
     if params["user"] == nil
-      @users = User.tagged_with((""), :any => true).where.not(latitude: nil, longitude: nil)
+      @users = User.tagged_with((""), :any => true)
     else
       @users = User.tagged_with((params["user"]["tag_ids"]), :any => true).where.not(latitude: nil, longitude: nil)
       @params = params["user"]["tag_ids"].drop(1).split.join(", ")

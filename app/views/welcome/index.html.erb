@@ -10,37 +10,35 @@
         <h1 id="search-title">Search for</h1>
       </div>
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <%= f.input "tag_ids", label: false,
                       collection: Tag.all.map(&:name),
                       as: :select,
                       include_blank: true,
-                      input_html: {"multiple": ""} %>
+                      input_html: {"multiple": ""},
+                      style: "width: 100%" %>
         </div>
-        <div class="col-md-2 hvr-pulse">
-            <%= f.button :submit, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, id:"search-btn" %>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 hvr-pulse">
+            <%= f.button :submit, "Search", id:"search-btn" %>
         </div>
       </div>
     <% end %>
-      <div class="row">
-        <div class="col-md-12">
-          <% if @params %>
-          You have searched for: <span id="params-display"><%= @params %></span>
-          <% end %>
-        </div>
+      <div class="col-lg-12">
+        <% if @params %>
+        You have searched for: <span id="params-display"><%= @params %></span>
+        <% end %>
       </div>
   </div>
 </div>
 
 <script>
   handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  handler.buildMap({ provider: {zoom:2}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(<%=raw @markers.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });
 </script>
-
 
 <script type="text/javascript">
   $('select').select2({

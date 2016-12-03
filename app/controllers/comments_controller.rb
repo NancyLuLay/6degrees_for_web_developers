@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @comment.user = current_user
       if @comment.save
-        redirect_to post_path(@post), notice: "Comment Created"
+        redirect_to posts_path
       else
         flash[:alert] = "Please fix errors below"
       end
@@ -18,10 +18,11 @@ class CommentsController < ApplicationController
     post = Post.find params[:post_id]
     comment = Comment.find params[:id]
     comment.destroy
-      redirect_to post_path(post), notice: "Comment deleted"
+      redirect_to posts_path, notice: "Comment deleted"
   end
 
   def authorize!
+    @comment = Comment.find params[:id]
     redirect_to root_path, alert: "Access denied" unless can? :manage, @comment
   end
 

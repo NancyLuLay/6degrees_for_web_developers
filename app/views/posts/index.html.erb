@@ -1,14 +1,13 @@
-<div class="container">
-  <div class="show-container-padding-top">
-    <div class="post-container">
-      <div class="show-container-padding">
-        <div class="text-color">
-        <h1 class="center">New Post</h1>
-          <div class="form-container">
+<div class="container post-index-container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="image-resize">
+        <%= image_tag current_user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
+      </div>
+      <div class="text-color">
+        <div class="form-container">
+          <h1 class="center">Create New Post</h1>
           <%= simple_form_for @post do |f|  %>
-          <!-- <div>
-            <%= f.input :post_title %>
-          </div> -->
           <div>
             <%= f.input :post_image, label: false %>
           </div>
@@ -20,28 +19,61 @@
           </div>
           <% end %>
           </div>
-        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="post-all">
-  <div class="container">
-    <h1 id="all-posts-title">All Posts</h1>
-      <% @posts.each do |post| %>
+    <div class="col-lg-8 col-md-6 post-all">
+      <h1 id="all-posts-title">All Posts</h1>
+      <% current_user.feed.each do |post| %>
         <div class="post-background">
-          <%= post.user.full_name %>:
-          <div class="post-title-text">
-            <!-- <%= link_to post.post_title, post_path(post)%> -->
+          <div class="row">
+            <div class="col-lg-1">
+              <%= image_tag post.user.profile_picture.url, class: "post-user-pic-thumb"%>
+            </div>
+            <div class="col-lg-11">
+              <%= link_to post.user.full_name, user_path(post.user) %>:
+              <div>
+                <%= post.post_body %>
+              </div>
+              <div>
+                <%= image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
+              </div>
+              <% if can? :manage, post %>
+                <%= link_to "Edit Post", edit_post_path(post) %>
+                |
+                <%= link_to "Delete Post", post_path(post),
+                                           method: :delete,
+                                           data: {confirm: "Are you sure you want to delete your post?"}
+                                           %>
+              <% end %>
+              <!-- create comment -->
+              <%= simple_form_for [post, @comment] do |f| %>
+                <div>
+                  <%= f.input :comment_body, label: false %>
+                </div>
+              <%= f.submit class: "btn btn-primary"%>
+              <% end %>
+              <!-- show comments -->
+              <% if @comment %>
+                <% post.comments.each do |comm|%>
+                  <div class="post-background">
+                    <%= current_user.full_name %>:
+                    <%= comm.comment_body %>
+                    <% if can? :manage, comm %>
+                      <!-- <%= link_to "Edit", edit_post_path(post) %> -->
+                      <!-- Routes needed -->
+                      |
+                      <%= link_to "Delete", post_comment_path(post, comm),
+                                            method: :delete,
+                                            data: {confirm: "Are you sure you want to delete your comment?"}%>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
           </div>
-          <div >
-            <%= post.post_body %>
-          </div>
-          <div >
-            <%= image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
-          </div>
-      </div>
+        </div>
       <% end %>
+    </div>
   </div>
 </div>

@@ -1,85 +1,95 @@
-<div class="container">
-  <div class="show-container-padding-top">
-    <div id="show-container">
-      <div class="show-container-padding">
-      <div>
-        <%= image_tag @user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
-      </div>
-      <div>
-        <div class="profile-header-name bold">
-          <%= @user.full_name %>
-        </div>
-        <div class="profile-header">
-          <%= @user.current_position %>
-          <% if (@user.current_company != "") %>
-          at <%= @user.current_company %>
+<div class="container show-container">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <%= image_tag @user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
+      <% if current_user == @user %>
+        <button type="button" class="btn btn-default hrv-grow col-lg-6 col-sm-12 col-xs-12"> <%= @user.following.count %> following</button>
+        <button type="button" class="btn btn-default hrv-grow col-lg-6 col-sm-12 col-xs-12"> <%= @user.followers.count %> followers</button>
+      <% else %>
+        <button type="button" class="btn btn-default hrv-grow col-lg-4 col-sm-12 col-xs-12"> <%= @user.following.count %> following</button>
+        <button type="button" class="btn btn-default hrv-grow col-lg-4 col-sm-12 col-xs-12"> <%= @user.followers.count %> followers</button>
+      <% end %>
+      <% unless current_user == @user %>
+        <% if current_user.following.include?(@user) %>
+          <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+               html: { method: :delete }) do |f| %>
+          <%= f.submit "Unfollow", class: "btn btn-primary hvr-grow col-lg-4 col-sm-12 col-xs-12" %>
           <% end %>
-        </div>
+        <% else %>
+          <%= form_for(current_user.active_relationships.build) do |f| %>
+            <%= hidden_field_tag :followed_id, @user.id %>
+            <%= f.submit "Follow", class: "btn btn-primary hvr-grow col-lg-4 col-sm-12 col-xs-12" %>
+          <% end %>
+        <% end %>
+      <% end  %>
+    </div>
+    <div class="col-lg-8 col-md-8">
+      <div class="profile-header-name bold">
+        <%= @user.full_name %>
       </div>
-
-      <div class="profile-summary">
+      <div class="profile-header">
+        <%= @user.current_position %>
+        <% if (@user.current_company != nil) %>
+        at <%= @user.current_company %>
+        <% end %>
+      </div>
+      <div class="text-content-just">
         <%= @user.summary %>
       </div>
-
       <div class="profile-github">
         <div>
-        <i class="fa fa-github" aria-hidden="true"></i>
-        <%= @user.github %>
+          <% unless @user.github == nil || @user.github == ""  %>
+            <i class="fa fa-github" aria-hidden="true"></i>
+            <%= @user.github %>
+          <% end %>
         </div>
         <div>
           <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          <%= @user.email %>
+          <%= @user.email%>
         </div>
         <div>
-          <i class="fa fa-mobile" aria-hidden="true"></i>
-          <%= @user.phone_number %>
+          <% unless @user.phone_number == nil || @user.phone_number == ""  %>
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <%= @user.phone_number%>
+          <% end %>
         </div>
       </div>
-
-<!-- following -->
-      <!-- <div>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-        <%= render 'follow_form' if user_signed_in? %>
-      </div> -->
-      <div class="">
-        <span id="follow-stats">
-          <button type="button" class="btn btn-default hrv-grow">25 following</button>
-          <button type="button" class="btn btn-default hrv-grow">12 followers</button>
-        </span>
-
-        <span id="follow-button">
-          <button type="button" class="btn btn-primary hvr-grow">&nbsp;&nbsp;Follow&nbsp;&nbsp;</button>
-        </span>
-      </div>
-      <!--  -->
-
-      <div class="col-md-6">
-        <%= render 'opening_show'if @user.openings %>
-      </div>
-      <div class="col-md-6">
-        <%= render 'tag_show' if (@user.tags) %>
-      </div>
-
-      <div class="col-lg-12 col-md-12">
-        <%= render 'experience_show' if (@user.experiences) %>
-      </div>
-
-      <div class="col-lg-12 col-md-12">
-        <%= render 'project_show' if @user.projects %>
-      </div>
-
-      <div id="followers-div">
-        <div class="col-lg-12 col-md-12">
-          <h1 id="user-map-title"><%= @user.first_name %>'s following...</h1>
-        </div>
-        <div>
-          <div id="map" class="map"></div>
-        </div>
-      </div>
-
     </div>
+  </div>
+    <!--  -->
+  <% if current_user.id == @user.id && @user.openings.count < 1 && @user.taggings.count < 1 && @user.experiences.count < 1 && @user.projects.count < 1%>
+    <h3 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-form">To update your profile go to Settings > Edit Profile</h3>
+  <% else %>
+  <div class="row">
+    <% if @user.openings.count < 1 || @user.taggings.count < 1  %>
+      <div class="col-lg-12 col-md-12">
+        <%= render 'opening_show' if @user.openings.count >= 1 %>
+      </div>
+      <div class="col-lg-12 col-md-12">
+      <%= render 'tag_show' if @user.taggings.count >= 1 %>
+      </div>
+    <% else %>
+      <div class="col-lg-6 col-md-6">
+        <%= render 'opening_show' if @user.openings.count >= 1 %>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <%= render 'tag_show' if @user.taggings.count >= 1 %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <%= render 'experience_show' if @user.experiences.count >= 1%>
+    </div>
+    <div class="col-lg-12 col-md-12">
+      <%= render 'project_show' if @user.projects.count >= 1%>
+    </div>
+    <% end %>
+    <div class="followers-div">
+      <div class="col-lg-12 col-md-12">
+        <h1 class="user-map-title"><%=@user.first_name%>'s following...</h1>
+        <div id="map" class="map"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -95,7 +105,6 @@
     ]
 
     handler.addPolylines(polylines)
-
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });

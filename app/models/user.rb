@@ -12,6 +12,18 @@ class User < ApplicationRecord
   acts_as_taggable
   acts_as_taggable_on TAG_CONTEXTS
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :password, presence: true
+  validates :current_position, presence: true
+  validates :location, presence: true
+
+  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, presence: true,
+                    uniqueness: {case_sensitive: false},
+                    format: VALID_EMAIL_REGEX,
+                    unless: :from_oauth?
+
   attr_accessor :profile_picture_url
 
   has_secure_password
@@ -24,11 +36,12 @@ class User < ApplicationRecord
                                    foreign_key: "followed_id",
                                    dependent: :destroy
 
+  has_many :followeds, through: :active_relationships
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  has_many :posts, dependent: :nullify
-  has_many :comments, dependent: :nullify
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_many :experiences, dependent: :destroy
   accepts_nested_attributes_for :experiences,
@@ -50,19 +63,7 @@ class User < ApplicationRecord
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-
-  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :email, presence: true,
-                    uniqueness: {case_sensitive: false},
-                    format: VALID_EMAIL_REGEX,
-                    unless: :from_oauth?
-
   serialize :linkedin_data, Hash
-
-  validates :current_position, presence: true
-  validates :location, presence: true
 
   def full_name
     "#{first_name} #{last_name}".squeeze(" ").strip.titleize
@@ -83,13 +84,13 @@ class User < ApplicationRecord
 
   def self.create_from_linkedin(linkedin_data)
     full_name = linkedin_data["info"]["name"].split
+    byebug
     create!(first_name: full_name[0],
             last_name: full_name[1],
             email: linkedin_data["info"]["email"],
             uid: linkedin_data[:uid],
             current_position: linkedin_data["info"]["description"],
             location: linkedin_data["info"]["location"],
-            profile_picture: linkedin_data["info"]["image"],
             provider: linkedin_data[:provider],
             linkedin_token: linkedin_data["credentials"]["token"],
             linkedin_secret: linkedin_data["credentials"]["secret"],
@@ -97,27 +98,20 @@ class User < ApplicationRecord
             linkedin_raw_info: linkedin_data)
   end
 
-  # Returns a user's status feed.
+  # Returns a user newsfeed
  def feed
-   following_ids = "SELECT followed_id FROM relationships
-                      WHERE  follower_id = :user_id"
-     Post.where("user_id IN (#{following_ids})
-                      OR user_id = :user_id", user_id: id)
+   following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+   Post.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
  end
 
-  # Follows a user.
+  # Follows a user
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end
 
-  # Unfollows a user.
+  # Unfollows a user
   def unfollow(other_user)
     active_relationships.find_by(followed_id: other_user.id).destroy
-  end
-
-  # Returns true if the current user is following the other user.
-  def following?(other_user)
-    following.include?(other_user)
   end
 
 end

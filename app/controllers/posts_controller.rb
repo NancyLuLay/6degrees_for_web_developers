@@ -6,45 +6,44 @@ class PostsController < ApplicationController
     @post = Post.new post_params
     @post.user = current_user
     if @post.save
-      redirect_to post_path(@post.id)
-    else render :show
+      redirect_to posts_path
+    else
+      flash[:alert] = "Post not created"
+      redirect_to posts_path
     end
   end
 
-  # def show
-  #   @post = Post.find params[:id]
-  #   @comment = Comment.new
-  # end
-
   def index
     @post = Post.new
-    @posts = Post.order(created_at: :desc)
+    @comment = Comment.new 
   end
 
-  # def edit
-  #   @post = Post.find params[:id]
-  # end
-  #
-  # def update
-  #   @post = Post.find params[:id]
-  #   if @post.update post_params
-  #     redirect_to post_path(@post)
-  #   else
-  #     render :edit
-  #   end
-  # end
+  def edit
+  end
 
-  # def destroy
-  #   post = Post.find params[:id]
-  #   post.destroy
-  #   redirect_to posts_path
-  # end
+  def update
+    if @post.update post_params
+      redirect_to posts_path
+    else
+      flash[:alert] = "Post not updated"
+      redirect_to posts_path
+    end
+  end
 
+  def destroy
+    post = Post.find params[:id]
+    post.destroy
+    redirect_to posts_path
+  end
+
+  private
   def authorize!
+    @post = Post.find params[:id]
     redirect_to root_path, alert: "Access denied" unless can? :manage, @post
   end
 
   def post_params
-    params.require(:post).permit([:post_title, :post_body, :post_image])
+    params.require(:post).permit([:post_body, :post_image])
   end
+
 end

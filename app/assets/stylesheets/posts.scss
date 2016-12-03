@@ -5,9 +5,15 @@
   font-size: 30px;
 }
 
+.image-resize{
+  height: auto;
+  max-width: 100%;
+}
+
 #all-posts-title{
   text-align: center;
 }
+
 .post-background{
   background-color: #2a2a2a;
   padding: 30px;
@@ -17,27 +23,22 @@
   border-color: white;
 }
 
-.post-show{
-  margin: auto;
-  width: 800px;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #4c4c4c;
+.post-index-container{
+  padding: 30px;
 }
 
 #all-posts{
   background-color: #151515;
 }
 
-.post-container{
-  border-radius: 10px;
-  margin-bottom: 50px;
-  padding-bottom: 50px;
-}
-
-#post-all{
+.post-all{
   background-color: black;
   color: white;
   width: 100%;
-  padding-bottom: 300px;
+  min-height: 700px;
+}
+
+.post-user-pic-thumb{
+  height: 50px;
+  width: 50px;
 }

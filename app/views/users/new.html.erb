@@ -1,20 +1,18 @@
 <div class="container">
-  <div class="show-container-padding-top">
-    <div id="registration-container">
-      <div class="show-container-padding">
-        <div id="registration-title">Register</div>
-          <%= simple_form_for @user do |f| %>
-              <%= f.input :first_name, placeholder: 'e.g. Nancy' %>
-              <%= f.input :last_name, placeholder: 'e.g. Lu' %>
-              <%= f.input :email, placeholder: 'user@domain.com' %>
-              <%= f.input :location, placeholder: 'e.g. Vancouver, Canada' %>
-              <%= f.input :current_position, placeholder: 'e.g. Student' %>
-              <%= f.input :password %>
-              <%= f.input :password_confirmation %>
-              <%= f.button :submit, "Register" %>
-          <% end %>
+  <div class="registration-container">
+    <div class="registration-title">Register</div>
+      <%= simple_form_for @user do |f| %>
+        <%= f.input :first_name, placeholder: 'Nancy' %>
+        <%= f.input :last_name, placeholder: 'Lu-Lay' %>
+        <%= f.input :email, label: '* Email', placeholder: 'user@domain.com' %>
+        <%= f.input :location, placeholder: 'Vancouver, Canada' %>
+        <%= f.input :current_position, placeholder: 'Full Stack Web Developer' %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation, label: '* Password Confirmation' %>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-form hvr-grow">
+          <%= f.button :submit, "Register" %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

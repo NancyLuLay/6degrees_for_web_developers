@@ -1,7 +1,7 @@
 <div>
-  <h1 id="exp-title">Experience</h1>
+  <h1 class="exp-title">Experience</h1>
   <% @user.experiences.each do |experience| %>
-    <div class="well experience-border col-md-12 ">
+    <div class="well experience-border text-content-just">
       <h3><%= experience.title %></h3>
         <p>
           <%= experience.body %>

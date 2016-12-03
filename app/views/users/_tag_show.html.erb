@@ -1,5 +1,5 @@
-<h1 id="tag-title">Tags</h1>
-<div id="tag-content" class="well tag-border">
+<h1 class="tag-title">Tags</h1>
+<div class="tag-content well tag-border text-content-just">
   <% User::TAG_CONTEXTS.each do |tag_context| %>
   <div>
     <%if (!@user.send("#{tag_context}_list").empty?)%>
