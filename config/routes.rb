@@ -2,13 +2,14 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  
+
   root "welcome#index"
   get 'auth/linkedin', as: :sign_in_with_linkedin
   get 'auth/linkedin/callback' => 'callbacks#linkedin'
 
   resources :posts do
     resources :comments, only:[:index, :create, :destroy]
+    resources :likes, only:[:create, :destroy]
   end
 
   resources :users, only: [:show, :new, :create, :edit, :update] do

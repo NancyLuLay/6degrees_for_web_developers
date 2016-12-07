@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130180423) do
+ActiveRecord::Schema.define(version: 20161206233534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 20161130180423) do
     t.index ["user_id"], name: "index_experiences_on_user_id", using: :btree
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
   create_table "openings", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -75,7 +84,6 @@ ActiveRecord::Schema.define(version: 20161130180423) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "post_title"
     t.text     "post_body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -162,6 +170,8 @@ ActiveRecord::Schema.define(version: 20161130180423) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "experiences", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "openings", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "projects", "users"

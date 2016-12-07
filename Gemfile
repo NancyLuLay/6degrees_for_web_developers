@@ -56,6 +56,7 @@ gem 'faker', github: "stympy/faker"
 gem 'devise'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'activeadmin', github: 'activeadmin'
+gem 'best_in_place', '~> 3.0.1'
 
 
 group :development, :test do

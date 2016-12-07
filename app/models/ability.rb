@@ -20,6 +20,19 @@ class Ability
       user != comment.user
     end
 
+    can :destroy, Like do |like|
+      user == like.user
+    end
+
+    can :like, Post do |post|
+      user != post.user
+    end
+
+    cannot :like, Post do |post|
+      user == post.user
+    end
+
+
   end
 
 end

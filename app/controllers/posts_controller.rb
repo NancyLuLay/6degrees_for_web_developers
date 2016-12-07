@@ -15,19 +15,15 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @comment = Comment.new 
+    @comment = Comment.new
   end
 
   def edit
   end
 
   def update
-    if @post.update post_params
-      redirect_to posts_path
-    else
-      flash[:alert] = "Post not updated"
-      redirect_to posts_path
-    end
+    @post = Post.find(params[:id])
+    @post.update_attribute(:post_body, params[:post][:post_body])
   end
 
   def destroy

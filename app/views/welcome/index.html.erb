@@ -24,7 +24,9 @@
       </div>
     <% end %>
       <div class="col-lg-12">
-        <% if @params %>
+        <% if @params && @users.count < 1 %>
+        No results for: <span id="params-display"><%= @params %></span>
+        <% elsif @params && @users.count >= 1 %>
         You have searched for: <span id="params-display"><%= @params %></span>
         <% end %>
       </div>

@@ -1,0 +1,21 @@
+<div class="container container-follow">
+	<h1><%= @user.full_name%>'s Following</h1>
+	<% if @users.any? %>
+	<% @users.each do |user| %>
+		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+			<div>
+				<%= image_tag user.profile_picture, class: "gravatar" %>
+			</div>
+			<div>
+				<%= link_to "#{user.full_name}", user_path(user), class:"user" %>
+			</div>
+		</div>
+		<% end %>
+	<% else %>
+	<h2>This user is not following any other user yet</h2>
+	<% end %>
+	<div>
+		<%= paginate @users %>
+	</div>
+
+</div>
