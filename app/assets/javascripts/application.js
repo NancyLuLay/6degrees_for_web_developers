@@ -16,10 +16,13 @@
 //= require underscore
 //= require gmaps/google
 //= require cocoon
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 
 // Navbar color change when scrolling down
 $(document).ready(function(){
+  // navbar
   setInterval(function(){
     if ($(this).scrollTop() > 50) {
       $('#navbar').css('background-color', '#3f3f3f');
@@ -28,6 +31,20 @@ $(document).ready(function(){
     }
   });
 
+// footer
   $('.home-footer').css('top',$(document).height() + 'px');
+
+// submit on enter - comments
+  $("#comment_comment_body").keypress(function(event) {
+    if (event.which == 13) {
+      $(this).closest('form').submit();
+    }
+  });
+
+//toggle comments
+  $("form#new_comment.simple_form.new_comment").hide();
+  $("div#comm-btn.btn.btn-default").click(function(event) {
+      $("form#new_comment.simple_form.new_comment").toggle();
+  });
 
 })

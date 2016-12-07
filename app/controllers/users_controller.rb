@@ -3,14 +3,16 @@ class UsersController < ApplicationController
   before_action :user_signed_in?, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
 
-  FOLLOWING_PER_PAGE = 6
-  FOLLOWERS_PER_PAGE = 6
+  FOLLOWING_PER_PAGE = 12
+  FOLLOWERS_PER_PAGE = 12
 
   def new
     @user = User.new
   end
 
   def show
+    @users = @user.following
+    # .page(params[:page]).per(FOLLOWING_PER_PAGE)
   end
 
   def create
@@ -93,13 +95,11 @@ class UsersController < ApplicationController
   def following
    @user  = User.find(params[:id])
    @users = @user.following.page(params[:page]).per(FOLLOWING_PER_PAGE)
-   render 'show_follow'
- end
+  end
 
  def followers
    @user  = User.find(params[:id])
    @users = @user.followers.page(params[:page]).per(FOLLOWERS_PER_PAGE)
-   render 'show_follow'
  end
 
   private

@@ -14,6 +14,13 @@ class CommentsController < ApplicationController
       end
   end
 
+  def update
+    post = Post.find params[:id]
+    comment = Comment.find params[:id]
+    byebug
+    comment.update_attribute(:comment_body, params[:comment][:comment_body])
+  end
+
   def destroy
     post = Post.find params[:post_id]
     comment = Comment.find params[:id]

@@ -4,24 +4,22 @@
       <div class="image-resize">
         <%= image_tag current_user.profile_picture.url(:version_profile_image), class: "profile-pic"%>
       </div>
-      <div class="text-color">
-        <div class="form-container">
-          <h1 class="center">Create New Post</h1>
-          <%= simple_form_for @post do |f|  %>
-          <div>
-            <%= f.input :post_image, label: false %>
-          </div>
-          <div>
-            <%= f.input :post_body, label: false%>
-          </div>
-          <div>
-            <%= f.submit class: "btn btn-default hvr-grow btn-center"%>
-          </div>
-          <% end %>
-          </div>
+      <div class="form-container">
+        <h1 class="center">Create New Post</h1>
+        <%= simple_form_for @post do |f|  %>
+        <div>
+          <%= f.input :post_image, label: false %>
+        </div>
+        <div>
+          <%= f.input :post_body, label: false%>
+        </div>
+        <div>
+          <%= f.submit class: "btn btn-default hvr-grow btn-center"%>
+        </div>
+        <% end %>
       </div>
     </div>
-
+<!-- Show posts -->
     <div class="col-lg-8 col-md-6 post-all">
       <h1 id="all-posts-title">All Posts</h1>
       <% current_user.feed.each do |post| %>
@@ -31,42 +29,70 @@
               <%= image_tag post.user.profile_picture.url, class: "post-user-pic-thumb"%>
             </div>
             <div class="col-lg-11">
-              <%= link_to post.user.full_name, user_path(post.user) %>:
+              <% if can? :manage, post %>
+                <div class="edit-delete">
+                  <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, post_path(post),
+                                             method: :delete,
+                                             data: {confirm: "Are you sure you want to delete your post?"}
+                                             %>
+                </div>
+              <% end %>
+              <%= link_to post.user.full_name, user_path(post.user) %>
+              <h6> <%= time_ago_in_words(post.created_at) %> ago</h6>
               <div>
-                <%= post.post_body %>
+                <h3><%= best_in_place_if current_user == post.user, post, :post_body %></h3>
               </div>
               <div>
                 <%= image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
               </div>
-              <% if can? :manage, post %>
-                <%= link_to "Edit Post", edit_post_path(post) %>
-                |
-                <%= link_to "Delete Post", post_path(post),
-                                           method: :delete,
-                                           data: {confirm: "Are you sure you want to delete your post?"}
-                                           %>
-              <% end %>
-              <!-- create comment -->
-              <%= simple_form_for [post, @comment] do |f| %>
-                <div>
-                  <%= f.input :comment_body, label: false %>
+              <% if can? :like, post %>
+                <% user_like = post.like_for current_user%>
+                <% if user_like.present? %>
+                <%= link_to "Unlike (#{post.likes.count})", post_like_path(post, user_like),
+                                      method: :delete,
+                                      class: 'btn btn-like' %>
+                <% else %>
+                  <%= link_to '<i class="fa fa-thumbs-up" aria-hidden="true"></i>Like'.html_safe,
+                                      post_likes_path(post), method: :post,
+                                      class: 'btn btn-like' %>
+                <% end %>
+              <% else %>
+                <div class="btn btn-like">
+                  <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like
                 </div>
-              <%= f.submit class: "btn btn-primary"%>
               <% end %>
+
+              <!-- create comment -->
+              <div id= "comm-btn" class="btn btn-like">
+                Comment
+              </div>
+              <div class="create-comm">
+                <%= simple_form_for [post, @comment] do |f| %>
+                <div class="row">
+                  <div class="col-md-2">
+                    <%= image_tag current_user.profile_picture.url, class: "post-user-pic-comm"%>
+                  </div>
+                  <div class="col-md-10">
+                    <%= f.input :comment_body, label: false %>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+
               <!-- show comments -->
               <% if @comment %>
                 <% post.comments.each do |comm|%>
-                  <div class="post-background">
-                    <%= current_user.full_name %>:
-                    <%= comm.comment_body %>
+                  <div class="comm-background">
+                    <%= image_tag comm.user.profile_picture.url, class: "post-user-pic-comm"%>
                     <% if can? :manage, comm %>
-                      <!-- <%= link_to "Edit", edit_post_path(post) %> -->
-                      <!-- Routes needed -->
-                      |
-                      <%= link_to "Delete", post_comment_path(post, comm),
-                                            method: :delete,
-                                            data: {confirm: "Are you sure you want to delete your comment?"}%>
+                      <div class="edit-delete">
+                        <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, post_comment_path(post, comm),
+                                              method: :delete,
+                                              data: {confirm: "Are you sure you want to delete your comment?"}%>
+                      </div>
                     <% end %>
+                    <%= comm.user.full_name %>:
+                    <%= comm.comment_body %>
                   </div>
                 <% end %>
               <% end %>

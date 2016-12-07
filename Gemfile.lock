@@ -82,6 +82,9 @@ GEM
     autoprefixer-rails (6.4.1)
       execjs
     bcrypt (3.1.11)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bootstrap-glyphicons (0.0.1)
       railties (>= 3.0)
       sass (>= 3.2)
@@ -273,6 +276,7 @@ DEPENDENCIES
   activeadmin!
   acts-as-taggable-on (~> 4.0)
   bcrypt (~> 3.1.7)
+  best_in_place (~> 3.0.1)
   bootstrap-glyphicons
   bootstrap-sass
   byebug
