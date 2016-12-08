@@ -1,0 +1,13 @@
+<div class="create-comm">
+	<%= simple_form_for [post, @comment], remote: true do |f| %>
+	<div class="row">
+		<div class="col-md-2">
+			<%= image_tag current_user.profile_picture.url, class: "post-user-pic-comm"%>
+		</div>
+		<div class="col-md-10">
+			<%= f.input :comment_body, label: false %>
+		</div>
+		<%= f.submit class: "btn btn-primary"%>
+	</div>
+	<% end %>
+</div>

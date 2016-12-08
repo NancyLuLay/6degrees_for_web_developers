@@ -35,16 +35,21 @@ $(document).ready(function(){
   $('.home-footer').css('top',$(document).height() + 'px');
 
 // submit on enter - comments
-  $("#comment_comment_body").keypress(function(event) {
-    if (event.which == 13) {
-      $(this).closest('form').submit();
-    }
-  });
+  // $("#comment_comment_body").keypress(function(event) {
+  //   if (event.which == 13) {
+  //     $(this).closest('form').submit();
+  //   }
+  // });
+  // problem: only submits to the first post- prob because they all have the same id
 
 //toggle comments
   $("form#new_comment.simple_form.new_comment").hide();
-  $("div#comm-btn.btn.btn-default").click(function(event) {
-      $("form#new_comment.simple_form.new_comment").toggle();
+  $("div#comm-btn.btn").click(function(event) {
+    // el = document.getElementById('comm-btn');
+    // console.log('this is an element', el);
+    // $(el.closest('#new_comment')).toggle();
+    $("form#new_comment.simple_form.new_comment").toggle();
   });
+  // problem: shows all comments and only submits to the first post
 
 })
