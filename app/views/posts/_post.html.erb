@@ -1,0 +1,60 @@
+<div id="<%= dom_id(post) %>">
+	<div class="post-background">
+		<div class="row">
+			<div class="col-lg-1">
+				<%= image_tag post.user.profile_picture.url, class: "post-user-pic-thumb"%>
+			</div>
+			<div class="col-lg-11">
+				<% if can? :manage, post %>
+					<div class="edit-delete">
+						<%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, post_path(post),
+																			 method: :delete,
+																			 remote: true,
+																			 data: {confirm: "Are you sure you want to delete your post?"}
+																			 %>
+					</div>
+				<% end %>
+				<%= link_to post.user.full_name, user_path(post.user) %>
+				<h6> <%= time_ago_in_words(post.created_at) %> ago</h6>
+				<div>
+					<h3><%= best_in_place_if current_user == post.user, post, :post_body %></h3>
+				</div>
+				<!-- <div>
+					<%# image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
+				</div> -->
+				<!-- <div class="btn-group"> -->
+					<% if can? :like, post %>
+						<% user_like = post.like_for current_user%>
+							<% if user_like.present? %>
+							<%= link_to "Unlike (#{post.likes.count})", post_like_path(post, user_like),
+																		method: :delete,
+																		class: 'btn btn-like' %>
+							<% else %>
+								<%= link_to '<i class="fa fa-thumbs-up" aria-hidden="true"></i>Like'.html_safe,
+																		post_likes_path(post),
+																		method: :post,
+																		class: 'btn btn-like' %>
+							<% end %>
+					<% else %>
+						<div class="btn btn-like">
+							<i class="fa fa-thumbs-up" aria-hidden="true"></i> Like
+						</div>
+					<% end %>
+					<!-- <div class="comm-btn btn btn-like">
+						Comment
+					</div>
+				</div> -->
+				<!-- create comment -->
+				<%= render 'comments/create_comm', post: post %>
+				<!-- show comments -->
+				<div id="comments">
+				<% if @comment %>
+					<% post.comments.each do |comm|%>
+						<%= render 'comments/show_comm', comment: comm, post: post %>
+					<% end %>
+				<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
