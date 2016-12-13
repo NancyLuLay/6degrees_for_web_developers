@@ -21,7 +21,17 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+div.alert{
+  width: 70%;
+  margin: auto;
+}
+
 // Navbar
+
+html.translated-ltr .navbar, html.translated-ltr .navbar-inner {
+  padding-top: 40px;
+}
+
 #navbar{
   background-color: transparent;
   border: 0;

@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 
   mount_uploader :post_image, PostImageUploader
 
-  validates :post_body, presence: true, length: {minimum: 5}
+  validates :post_body, presence: true, length: {minimum: 1}
 
   def like_for(user)
     likes.find_by_user_id user

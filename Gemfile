@@ -57,7 +57,7 @@ gem 'devise'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'activeadmin', github: 'activeadmin'
 gem 'best_in_place', '~> 3.0.1'
-
+gem 'jquery-ui-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

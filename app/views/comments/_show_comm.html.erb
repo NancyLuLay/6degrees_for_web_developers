@@ -1,0 +1,16 @@
+
+	<div id="<%= dom_id(comment) %>">
+		<div class="comm-background">
+			<%= image_tag comment.user.profile_picture.url, class: "post-user-pic-comm"%>
+			<% if can? :manage, comment %>
+				<div class="edit-delete">
+					<%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, post_comment_path(post, comment),
+																method: :delete,
+																remote: true,
+																data: {confirm: "Are you sure you want to delete your comment?"}%>
+				</div>
+			<% end %>
+			<%= comment.user.full_name %>:
+			<%= comment.comment_body %>
+		</div>
+	</div>

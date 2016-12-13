@@ -24,8 +24,19 @@
   <body id="app-body">
     <%= render '/layouts/navbar' %>
     <div id="body-yield">
-      <%= flash[:notice] %>
-      <%= yield %>
+      <% if flash[:notice] -%>
+        <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= flash[:notice] %></div>
+        </div>
+      <% end %>
+      <% if flash[:alert] -%>
+        <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= flash[:alert] %></div>
+        </div>
+      <% end %>
+    <%= yield %>
     </div>
 <!-- footer -->
     <%# render '/layouts/footer' %>

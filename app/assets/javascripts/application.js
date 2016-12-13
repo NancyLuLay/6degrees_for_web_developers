@@ -13,6 +13,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-ui
 //= require underscore
 //= require gmaps/google
 //= require cocoon
@@ -32,19 +33,36 @@ $(document).ready(function(){
   });
 
 // footer
-  $('.home-footer').css('top',$(document).height() + 'px');
+  // $('.home-footer').css('top',$(document).height() + 'px');
 
 // submit on enter - comments
-  $("#comment_comment_body").keypress(function(event) {
+  $("#texarea.form-control.text.required").keypress(function(event) {
     if (event.which == 13) {
-      $(this).closest('form').submit();
+      console.log(event);
+      event.preventDefault();
+      $(this).closest("#new_comment").submit();
+      // $("#" + event.toElement.parentElement.id + " form").submit();
     }
   });
 
+  // problem: only submits to the first post- prob because they all have the same id
+
 //toggle comments
+// http://www.theappguruz.com/blog/dynamic-event-binding-demo-jquery
+// problems:
+// 2-posts created with ajax can't toggle
+  // $("form#new_comment.simple_form.new_comment").hide();
+  // $("div.comm-btn"on("click", function() {
+  // $("form#new_comment.simple_form.new_comment").toggle();
+  // });
+
   $("form#new_comment.simple_form.new_comment").hide();
-  $("div#comm-btn.btn.btn-default").click(function(event) {
-      $("form#new_comment.simple_form.new_comment").toggle();
+  $(document).on('click', '.comm-btn', function (event) {
+     var nextID = 'id' + (new Date()).getTime();
+     var comm = "<div id=\"div" + nextID + "\">";
+     $(".comm-btn").closest("#new_comment").append(comm);
+    // $("div.post-background").closest("#new_comment").append(comm);
+    $("#" + event.toElement.parentElement.nextElementSibling.id + " form").toggle();
   });
 
 })

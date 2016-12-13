@@ -5,11 +5,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.new post_params
     @post.user = current_user
-    if @post.save
-      redirect_to posts_path
-    else
-      flash[:alert] = "Post not created"
-      redirect_to posts_path
+    respond_to do |format|
+      if @post.save
+        format.html {redirect_to posts_path}
+        format.js {render :create_success}
+      else
+        format.html {redirect_to posts_path}
+        format.js {render :create_failure}
+      end
     end
   end
 
@@ -27,9 +30,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find params[:id]
-    post.destroy
-    redirect_to posts_path
+    @post = Post.find params[:id]
+    @post.destroy
+    respond_to do |format|
+      format.html {redirect_to posts_path}
+      format.js {render}
+    end
   end
 
   private

@@ -87,7 +87,6 @@ class User < ApplicationRecord
 
   def self.create_from_linkedin(linkedin_data)
     full_name = linkedin_data["info"]["name"].split
-    byebug
     create!(first_name: full_name[0],
             last_name: full_name[1],
             email: linkedin_data["info"]["email"],
@@ -105,6 +104,7 @@ class User < ApplicationRecord
  def feed
    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
    Post.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).order("created_at DESC")
+  #  Comment.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).order("created_at")
  end
 
   # Follows a user

@@ -7,25 +7,33 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
     @comment.post = @post
     @comment.user = current_user
+    respond_to do |format|
       if @comment.save
-        redirect_to posts_path
+        format.html {redirect_to posts_path}
+        format.js {render :create_success}
       else
         flash[:alert] = "Please fix errors below"
+        format.html {render "/posts/index"}
+        format.js {render :create_failure}
       end
+    end
   end
 
-  def update
-    post = Post.find params[:id]
-    comment = Comment.find params[:id]
-    byebug
-    comment.update_attribute(:comment_body, params[:comment][:comment_body])
-  end
+  # def update
+  #   post = Post.find params[:id]
+  #   comment = Comment.find params[:id]
+  #   byebug
+  #   comment.update_attribute(:comment_body, params[:comment][:comment_body])
+  # end
 
   def destroy
-    post = Post.find params[:post_id]
-    comment = Comment.find params[:id]
-    comment.destroy
-      redirect_to posts_path, notice: "Comment deleted"
+    @post = Post.find params[:post_id]
+    @comment = Comment.find params[:id]
+    @comment.destroy
+    respond_to do |format|
+      format.html {redirect_to posts_path, notice: "Comment deleted"}
+      format.js {render}
+    end
   end
 
   def authorize!
