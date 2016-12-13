@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
     if params["user"] == nil
       @users = User.tagged_with((""), :any => true)
     else
-      @users = User.tagged_with((params["user"]["tag_ids"]), :any => true).where.not(latitude: nil, longitude: nil)
+      @users = User.tagged_with((params["user"]["tag_ids"]), :any => true)
       @params = params["user"]["tag_ids"].drop(1).split.join(", ")
     end
     @markers = Gmaps4rails.build_markers(@users) do |user, marker|

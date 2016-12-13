@@ -52,7 +52,7 @@ $(document).ready(function(){
 // problems:
 // 2-posts created with ajax can't toggle
   // $("form#new_comment.simple_form.new_comment").hide();
-  // $("div.comm-btn").on("click", function() {
+  // $("div.comm-btn"on("click", function() {
   // $("form#new_comment.simple_form.new_comment").toggle();
   // });
 
