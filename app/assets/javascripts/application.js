@@ -60,9 +60,9 @@ $(document).ready(function(){
   $(document).on('click', '.comm-btn', function (event) {
      var nextID = 'id' + (new Date()).getTime();
      var comm = "<div id=\"div" + nextID + "\">";
-    //  $(".comm-btn").closest("#new_comment").append(comm);
-    $("div.post-background").closest("#new_comment").append(comm);
-    $("#" + event.toElement.parentElement.id + " form").toggle();
+     $(".comm-btn").closest("#new_comment").append(comm);
+    // $("div.post-background").closest("#new_comment").append(comm);
+    $("#" + event.toElement.parentElement.nextElementSibling.id + " form").toggle();
   });
 
 })

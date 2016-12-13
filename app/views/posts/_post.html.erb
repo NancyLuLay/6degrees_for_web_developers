@@ -22,7 +22,7 @@
 				<!-- <div>
 					<%# image_tag(post.post_image.url(:medium)) if post.post_image.url(:medium)%>
 				</div> -->
-				<!-- <div class="btn-group"> -->
+				<div class="btn-group">
 					<% if can? :like, post %>
 						<% user_like = post.like_for current_user%>
 							<% if user_like.present? %>
@@ -40,12 +40,12 @@
 							<i class="fa fa-thumbs-up" aria-hidden="true"></i> Like
 						</div>
 					<% end %>
-					<!-- <div class="comm-btn btn btn-like">
+					<!-- create comment -->
+					<div class="comm-btn btn btn-like">
 						Comment
 					</div>
-				</div> -->
-				<!-- create comment -->
-				<%= render 'comments/create_comm', post: post %>
+				</div>
+					<%= render 'comments/create_comm', post: post %>
 				<!-- show comments -->
 				<div id="comments">
 				<% if @comment %>

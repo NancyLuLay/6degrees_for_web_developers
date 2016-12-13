@@ -1,14 +1,25 @@
-<a class="navbar-brand topnav lobster hvr-grow" href="http://localhost:3000/"><span id="six-degrees">6Degrees</span>&nbsp;&nbsp;<span id="for">for</span><span id="web-dev">Web Developers</span></a>
+<div data-popup_open= "popup-1" }>
+  <div class="popup-1" data-popup="popup-1" id="popup">
+    <div class="popup-inner">
+      <a class="navbar-brand topnav lobster hvr-grow" href="http://localhost:3000/"><span id="six-degrees">6Degrees</span>&nbsp;&nbsp;<span id="for">for</span><span id="web-dev">Web Developers</span></a>
 
-<h1 class="center">Sign In</h1>
-<%= simple_form_for :sessions, :url => sessions_path do |f|%>
-  <div >
-    <%= f.input :email %>
+      <h1 class="center">Sign In</h1>
+      <%= simple_form_for :sessions, :url => sessions_path do |f|%>
+        <div >
+          <%= f.input :email %>
+        </div>
+        <div >
+          <%= f.input :password %>
+        </div>
+        <div>
+            <%= f.button :submit, "Sign In", id:"btn-sign-in",  class:"col-md-offset-4 col-md-4 hvr-grow" %>
+        </div>
+      <% end %>
+
+      <p>
+        <a data-popup-close="popup-1" href="#"></a>
+      </p>
+      <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+    </div>
   </div>
-  <div >
-    <%= f.input :password %>
-  </div>
-  <div>
-      <%= f.button :submit, "Sign In", id:"btn-sign-in",  class:"col-md-offset-4 col-md-4 hvr-grow" %>
-  </div>
-<% end %>
+</div>

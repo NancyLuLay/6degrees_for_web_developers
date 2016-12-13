@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
     @post.destroy
     respond_to do |format|
-      format.html {redirect_to posts_path, notice: "Comment deleted"}
+      format.html {redirect_to posts_path}
       format.js {render}
     end
   end

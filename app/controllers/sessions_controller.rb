@@ -7,16 +7,17 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:sessions][:email])
     if user && user.authenticate(params[:sessions][:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Signed In"
+      flash[:notice] = "Signed In"
+      redirect_to root_path
     else
-      flash[:alert] = "Wrong Credentials"
-      render :new
+      redirect_to root_path, alert: "Incorrect email or password"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: "Signed Out"
+    flash[:notice] = "Signed Out"
+    redirect_to root_path
   end
 
 end

@@ -8,7 +8,7 @@ class LikesController < ApplicationController
 			like.save
 			redirect_to posts_path
 		else
-			redirect_to posts_path, notice: "Liked!"
+			redirect_to posts_path
 		end
 	end
 

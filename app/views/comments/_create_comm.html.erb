@@ -1,15 +1,12 @@
 <div id="<%= post.id %>">
-	<div class="comm-btn btn btn-like">
-		Comment
-	</div>
 	<% if @comment %>
 		<div class="create-comm">
 			<%= simple_form_for [post, @comment], remote: true do |f| %>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
 						<%= image_tag current_user.profile_picture.url, class: "post-user-pic-comm"%>
 					</div>
-					<div class="col-md-10">
+					<div class="col-lg-10 col-md-9 col-sm-9 col-xs-9">
 						<%= f.input :comment_body, label: false %>
 					</div>
 					<!-- <%= f.submit class: "btn btn-primary"%> -->
